@@ -1,6 +1,6 @@
 ### Level 1: Basics, Variables & Input
 
-# Profile Card Generator
+#### Profile Card Generator
 
 # Type Casting Calculator
 

@@ -78,27 +78,27 @@
 
 
 # --------------------- Number Guessing Game
-secret_number = 7
+# secret_number = 7
 
-for i in range(3):
-    user_input = input("Guess the number: ")
+# for i in range(3):
+#     user_input = input("Guess the number: ")
 
-    try:
-        num_ber = float(user_input)
-    except ValueError:
-        print("Please enter a valid number!")
-        continue
+#     try:
+#         num_ber = float(user_input)
+#     except ValueError:
+#         print("Please enter a valid number!")
+#         continue
     
     
-    if num_ber < secret_number:
-        print("The guessed number is low, try again.")
-    elif num_ber > secret_number:
-        print("The guessed number is high, try again.")
-    else:
-        print("You win!")
-        break
-else:
-    print("Game over! You ran out of attempts.")
+#     if num_ber < secret_number:
+#         print("The guessed number is low, try again.")
+#     elif num_ber > secret_number:
+#         print("The guessed number is high, try again.")
+#     else:
+#         print("You win!")
+#         break
+# else:
+#     print("Game over! You ran out of attempts.")
 
 
 
@@ -127,3 +127,27 @@ else:
 #         break
 # else:
 #     print("Game over! You ran out of attempts.")
+
+
+
+
+
+
+# ---------------------  Multiplication Table & Filter
+
+user_input = input("Put your number: ")
+
+
+try:
+    num_ber = int(user_input)
+    
+    for num in range(1, 13): 
+        result = num_ber * num
+        
+        if result % 5 == 0:  
+            continue
+            
+        print(f"{num_ber} x {num} = {result}")
+
+except ValueError:
+    print("Please enter a valid number!")

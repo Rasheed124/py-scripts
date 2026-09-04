@@ -6,8 +6,18 @@
 
 #### Type Casting Calculator
 
+
 ### Level 2: Operators & Logic
 
 #### Simple Interest & Budget Evaluator
 
 #### Grade & Eligibility System
+
+
+### Level 3: Loops & Iteration
+
+#### While Loops, For Loops, range()
+
+#### Number Guessing Game
+
+#### Multiplication Table & Filter

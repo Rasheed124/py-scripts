@@ -1,4 +1,6 @@
-## TASKS
+## CURRICULUM TASK
+
+## Basic Syntax
 
 ### Level 1: Basics, Variables & Input
 
@@ -6,13 +8,11 @@
 
 #### Type Casting Calculator
 
-
 ### Level 2: Operators & Logic
 
 #### Simple Interest & Budget Evaluator
 
 #### Grade & Eligibility System
-
 
 ### Level 3: Loops & Iteration
 

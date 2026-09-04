@@ -32,44 +32,98 @@
 # ---------------------  Third  ONE -------------------------------
 
 
-principal = float(input("Enter principal: "))
-rate = float(input("Enter rate: "))
-time = float(input("Enter time in years: "))
+# --------------------- Simple Interest & Budget Evaluator
 
-interest = (principal * rate * time) / 100
+# principal = float(input("Enter principal: "))
+# rate = float(input("Enter rate: "))
+# time = float(input("Enter time in years: "))
 
-if interest > 500:
-    print("High Return")
-else:
-    print("Standard Return")
+# interest = (principal * rate * time) / 100
 
-print(f"Calculated Interest: ${interest}")
+# if interest > 500:
+#     print("High Return")
+# else:
+#     print("Standard Return")
+
+# print(f"Calculated Interest: ${interest}")
 
 
+# ---------------------  Grade & Eligibility System
 
+# score = float(input("Enter student score (0-100): "))
+# attendance = float(input("Enter attendance percentage (0-100): "))
 
-score = float(input("Enter student score (0-100): "))
-attendance = float(input("Enter attendance percentage (0-100): "))
+# if score >= 90:
+#     grade = "A"
+# elif score >= 80:
+#     grade = "B"
+# elif score >= 70:
+#     grade = "C"
+# else:
+#     grade = "F"
 
-# Assign Grade
-if score >= 90:
-    grade = "A"
-elif score >= 80:
-    grade = "B"
-elif score >= 70:
-    grade = "C"
-else:
-    grade = "F"
+# if score >= 70 and attendance >= 75:
+#     status = "Passed"
+# else:
+#     status = "Failed"
 
-# Check Pass/Fail Eligibility
-if score >= 70 and attendance >= 75:
-    status = "Passed"
-else:
-    status = "Failed"
-
-print(f"Grade: {grade}")
-print(f"Status: {status}")
+# print(f"Grade: {grade}")
+# print(f"Status: {status}")
 
 
 
 # ---------------------  Fifth  ONE -------------------------------
+
+
+
+
+# --------------------- Number Guessing Game
+secret_number = 7
+
+for i in range(3):
+    user_input = input("Guess the number: ")
+
+    try:
+        num_ber = float(user_input)
+    except ValueError:
+        print("Please enter a valid number!")
+        continue
+    
+    
+    if num_ber < secret_number:
+        print("The guessed number is low, try again.")
+    elif num_ber > secret_number:
+        print("The guessed number is high, try again.")
+    else:
+        print("You win!")
+        break
+else:
+    print("Game over! You ran out of attempts.")
+
+
+
+# USING FOR LOOP
+
+# secret_number =  7
+# i =0
+# while i < 3:
+#     user_input = input("Guess the number: ")
+
+#     try:
+#         num_ber = float(user_input)
+#     except ValueError:
+#         print("Please enter a valid number!")
+#         continue
+
+#     i+=1
+
+    
+#     if num_ber < secret_number:
+#         print("The guessed number is low, try again.")
+#     elif num_ber > secret_number:
+#         print("The guessed number is high, try again.")
+#     else:
+#         print("You win!")
+#         break
+# else:
+#     print("Game over! You ran out of attempts.")

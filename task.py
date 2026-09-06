@@ -78,6 +78,7 @@
 
 
 # --------------------- Number Guessing Game
+
 # secret_number = 7
 
 # for i in range(3):
@@ -154,9 +155,9 @@
 
 
 
+# ---------------------  Dynamic Shopping Cart
 
 
-# --------------------- Dynamic Shopping Cart
 
 # cart = []
 
@@ -209,17 +210,16 @@
 
 
 
+# ---------------------  Coordinate Tracker & Immutable Records
 
-
-# --------------------- Coordinate Tracker & Immutable Records
 
 # points = [(1, 2), (4, 5), (-2, 8), (3, 3)]
 
 # highest_point = None
-# highest_sum = float("-inf")  # Start with negative infinity to handle negative coordinates properly
+# highest_sum = float("-inf")  
 
 # for point in points:
-#     x, y = point  # Tuple unpacking
+#     x, y = point  # Tuple unpacking - destructuring
 #     current_sum = x + y
     
 #     print(f"Point {point} -> Sum: {x} + {y} = {current_sum}")
@@ -233,7 +233,9 @@
 
 
 
+
 # --------------------- Interactive Inventory & Order System,
+
 
 inventory = [
     ("Laptop", 1000, 5),
@@ -295,7 +297,6 @@ while True:
                 total_price *= 0.90
                 discount_applied = True
 
-            # Update stock in inventory (tuples are immutable, so replace with updated tuple)
             new_stock = stock - quantity
             inventory[found_index] = (name, price, new_stock)
 

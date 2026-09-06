@@ -14,6 +14,8 @@
 
 #### Grade & Eligibility System
 
+
+
 ### Level 3: Loops & Iteration
 
 #### While Loops, For Loops, range()
@@ -21,3 +23,19 @@
 #### Number Guessing Game
 
 #### Multiplication Table & Filter
+
+
+### Level 4: Data Structures
+
+### Lists, List Methods, Tuples
+
+#### Dynamic Shopping Cart
+
+#### Coordinate Tracker & Immutable Records
+
+
+
+### Level 5: Capstone Project (Advanced Integration)
+
+### Interactive Inventory & Order System
+

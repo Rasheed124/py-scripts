@@ -1,0 +1,7 @@
+List comprehension
+
+
+[i.lower() for i in cart] is a list comprehension. It creates a temporary list containing all current items in cart converted to lowercase (e.g., if cart = ["Milk", "Bread"], this generates ["milk", "bread"]).
+
+
+x, y = point  # Tuple unpacking

@@ -6,7 +6,7 @@ lists are ordered and can contain duplicates.
 
 Lists are mutable, implying that we can add, remove, and change their elements. For example, we can use append() to add a new element at the end of the list:
 
-Set can't contain duplicates    
+Set can't contain duplicates
 
 <!-- Python Tuples -->
 
@@ -28,3 +28,12 @@ The names of five US presidents are included in random order because sets are un
 Sets are mutable, allowing us to add and remove their elements. To add a single element to the set, simply use the add() method:
 
 Considering that Python sets are unordered, we cannot access or change an individual element of a set using indexing.
+
+<!-- Python Dictionary -->
+
+Basically, Python dictionaries are an unordered collection of data values.
+
+a dictionary's elements are key-value pairs instead of single data values.
+
+Are mutable and dynamic, meaning that you can add, delete, and change their elements.
+Can be nested, meaning that a dictionary can contain another dictionary.

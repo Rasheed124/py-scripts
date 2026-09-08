@@ -1,0 +1,15 @@
+PYTHON BUILT IN DATA STRUCTURE 
+
+Its built-in data structures include lists, tuples, sets, and dictionaries.
+
+
+Python has lots of different data structures with different features and functions. Its built-in data structures include lists, tuples, sets, and dictionaries. However, this is not an exhaustive list of the data structures available in Python. Some additional data structures can be imported from different modules or packages.
+
+
+
+To use arrays in Python, you need to import either an array module or a NumPy package.
+
+import array as arr
+
+
+import numpy as np

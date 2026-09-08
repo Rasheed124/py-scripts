@@ -1,0 +1,30 @@
+<!-- Python List -->
+
+A Python list is a built-in data structure that holds a collection of items.
+
+lists are ordered and can contain duplicates.
+
+Lists are mutable, implying that we can add, remove, and change their elements. For example, we can use append() to add a new element at the end of the list:
+
+Set can't contain duplicates    
+
+<!-- Python Tuples -->
+
+A Python tuple is another built-in data structure that can hold a collection of elements. Tuples are technically very similar to lists. However, they usually have different applications; while lists mainly contain a collection of different items, tuple elements often correspond to one record.
+
+Record of us president
+us_president_tuple = ('Joe', 'Biden', '2021-01-20', 'Democratic')
+
+These elements appear in a specific order – tuples are ordered. We don’t have duplicate elements in our tuple, but you can store duplicates in Python tuples.
+
+Tuples are immutable. This data structure doesn’t allow changing, adding, or removing individual elements.
+
+<!-- Python Set -->
+
+us_presidents_set = {'Bill Clinton', 'Joe Biden', 'Donald Trump', 'Barack Obama', 'George W. Bush'}
+
+The names of five US presidents are included in random order because sets are unordered. Also, sets cannot contain duplicates; thus, all the names are included only once, no matter how many terms that person served as president.
+
+Sets are mutable, allowing us to add and remove their elements. To add a single element to the set, simply use the add() method:
+
+Considering that Python sets are unordered, we cannot access or change an individual element of a set using indexing.

@@ -5,3 +5,9 @@ List comprehension
 
 
 x, y = point  # Tuple unpacking
+
+
+
+SET
+
+In the definition above, Python sets may not sound very impressive. But one of their biggest powers lies in combining and filtering elements from multiple sets through the use of set operations.

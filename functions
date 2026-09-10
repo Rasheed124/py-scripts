@@ -1,0 +1,30 @@
+<!-- Abstraction -->
+
+Abstraction is about managing complexity by exposing a simplified interface to the user or programmer, while keeping the internal workings of a piece of code private or irrelevant to the context of use. You can do this by hiding a given functionality inside a function and exposing only the function’s interface, consisting of its name and expected arguments, to the rest of the program.
+
+
+<!-- Encapsulation -->
+Encapsulation refers to bundling data and behaviors into a single unit and restricting direct access to some of these components.
+
+<!-- Modularity -->
+
+
+Modularity is a design principle that divides a program into separate, independent, and interchangeable components. Each component is a self-contained unit that encapsulates a specific part of the program’s functionality.
+
+<!-- Reusability -->
+
+Reusability is the ability to use existing code in new contexts without repeating the code itself. It implies writing code in a way that allows you to use it multiple times across different parts of a program, or even across multiple projects, with little or no modification.
+
+
+<!-- Maintainability -->
+
+
+<!-- Testability -->
+
+
+
+<!-- Two main ways to call Python functions -->
+
+Positional Arguments
+
+Keyword Arguments

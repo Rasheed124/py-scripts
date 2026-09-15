@@ -24,6 +24,14 @@ Reusability is the ability to use existing code in new contexts without repeatin
 
 
 <!-- Two main ways to call Python functions -->
+/ and *
+
+When passed into function as parameter
+/ - Key word only and positional argument
+* - Keyword only argument
+
+when passed into a function as parameter 
+
 
 Positional Arguments
 

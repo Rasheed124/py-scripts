@@ -118,10 +118,22 @@ values = [5, 3, 8, 2, 5]  # Simulates a large data set
 
 
 
-def average(*args):
-    return sum(args) 
+# def average(*args):
+#     return sum(args) 
 
 
-args = average(1, 2, 3)
+# args = average(1, 2, 3)
 
-print(args)
+# print(args)
+
+
+from functools import reduce
+
+empty_values = [1, 3, 5]
+
+total = reduce(lambda x, y: x + y, empty_values, 1)
+
+print(total)
+
+# Expected result:
+# 0

@@ -1,0 +1,7 @@
+# Raising an Exception in Python 
+
+
+
+AssertionError
+
+#   you should only use when debugging your program during development. This exception is the AssertionError. The AssertionError is special because you shouldn’t ever raise it yourself using raise.

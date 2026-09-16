@@ -148,3 +148,42 @@ print(calc_age(2021, john))
 
 
 # Annotating overloaded functions
+
+
+def add_number(value, num):
+    if isinstance(value, int):
+        return value + num
+    elif isinstance(value, list):
+        return [i + num for i in value]
+
+print(add_number(3, 4))              # 7
+print(add_number([1, 2, 5], 4))    # [5, 6, 9]
+
+
+
+
+
+from typing import overload
+
+@overload
+def add_number(value: int, num: int) -> int: 
+    if isinstance(value, int):
+        return value + num
+    elif isinstance(value, list):
+        return [i + num for i in value]
+
+@overload
+def add_number(value: list, num: int) -> list: 
+    if isinstance(value, int):
+        return value + num
+    elif isinstance(value, list):
+        return [i + num for i in value]
+
+def add_number(value, num):
+    if isinstance(value, int):
+        return value + num
+    elif isinstance(value, list):
+        return [i + num for i in value]
+
+print(add_number(3, 4))
+print(add_number([1, 2, 5], 4))

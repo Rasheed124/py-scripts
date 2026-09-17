@@ -1,0 +1,22 @@
+| Order | Project                           | Main concepts you learn                                               |
+| ----: | --------------------------------- | --------------------------------------------------------------------- |
+|     1 | **Simple Calculator**             | Variables, input, functions, `if`, loops, exceptions, annotations     |
+|     2 | **Unit Converter**                | Functions, dictionaries, validation, numeric types, program structure |
+|     3 | **Password Generator**            | `random`/`secrets`, `string`, lists, loops, validation                |
+|     4 | **Word/Character Counter**        | Strings, file reading, text processing, functions                     |
+|     5 | **Email Address Extractor**       | String processing, regular expressions, sets                          |
+|     6 | **Phone Number Extractor**        | Regex, validation, normalization, structured data                     |
+|     7 | **Text File Searcher**            | `pathlib`, files, directories, exceptions                             |
+|     8 | **Markdown/HTML Link Extractor**  | Regex/string parsing, files, collections                              |
+|     9 | **Contact Book**                  | CRUD, dictionaries, JSON, functions, data modeling                    |
+|    10 | **To-Do CLI**                     | CLI design, JSON, CRUD, program architecture                          |
+|    11 | **Expense Tracker**               | CSV/JSON, data modeling, aggregation, dates                           |
+|    12 | **CSV Data Cleaner**              | CSV, data validation, transformations, missing data                   |
+|    13 | **Log File Analyzer**             | Parsing, statistics, dictionaries, larger datasets                    |
+|    14 | **Bulk File Renamer**             | `pathlib`, filename manipulation, batch operations                    |
+|    15 | **Bulk Extension Changer**        | Filesystem operations, safe renaming                                  |
+|    16 | **File Organizer**                | `pathlib`, `shutil`, directories, automation                          |
+|    17 | **Automatic Downloads Organizer** | File monitoring, automation, classification                           |
+|    18 | **Duplicate File Finder**         | Hashing, binary files, performance                                    |
+|    19 | **Folder Backup Tool**            | Filesystem synchronization, timestamps, comparison                    |
+|    20 | **Automatic Report Generator**    | Combining CSV, calculations, formatting, architecture                 |

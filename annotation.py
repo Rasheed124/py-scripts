@@ -144,10 +144,14 @@ def calc_age(current_year: int, data: HasBirthYear) -> int:
     return current_year - data.get_birthyear()
 
 john = Person("john doe", 1996)
-print(calc_age(2021, john))
+# print(calc_age(2021, john))
 
 
 # Annotating overloaded functions
+
+
+
+# without OVERLOADING types - overload
 
 
 def add_number(value, num):
@@ -156,14 +160,37 @@ def add_number(value, num):
     elif isinstance(value, list):
         return [i + num for i in value]
 
-print(add_number(3, 4))              # 7
-print(add_number([1, 2, 5], 4))    # [5, 6, 9]
+# print(add_number(3, 4))             
+# print(add_number([1, 2, 5], 4))    
 
 
 
-
+# WITH OVERLOADING types - overload
 
 from typing import overload
+
+# @overload
+# def add_number(value: int, num: int) -> int: 
+    # if isinstance(value, int):
+    #     return value + num
+    # elif isinstance(value, list):
+    #     return [i + num for i in value]
+
+# @overload
+# def add_number(value: list, num: int) -> list: 
+#     if isinstance(value, int):
+#         return value + num
+#     elif isinstance(value, list):
+#         return [i + num for i in value]
+
+
+
+# print(add_number(3, 4))
+
+# print(add_number([1, 2, 5], 4))
+
+from typing import overload
+
 
 @overload
 def add_number(value: int, num: int) -> int: 
@@ -185,5 +212,18 @@ def add_number(value, num):
     elif isinstance(value, list):
         return [i + num for i in value]
 
+
 print(add_number(3, 4))
 print(add_number([1, 2, 5], 4))
+
+
+# Annotating constants with Final
+
+
+from typing import Final
+
+MIN: Final = 10
+
+MIN = 13
+
+# print(MIN)

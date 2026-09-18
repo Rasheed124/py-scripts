@@ -1,0 +1,55 @@
+==============================Immutable Data Types==================
+
+Immutable objects cannot be changed in place after creation. Any modification operation creates an entirely new object in memory.
+
+        Strings (str): Text sequences, e.g., "hello".
+
+        Integers (int): Whole numbers, e.g., 42.
+
+        Floats (float): Floating-point numbers, e.g., 3.14.
+
+        Booleans (bool): True or False values, e.g., True.
+
+        Tuples (tuple): Ordered, immutable sequences of items, e.g., (1, 2, 3).
+
+        Frozensets (frozenset): Immutable versions of sets, e.g., frozenset([1, 2]).
+
+        Bytes (bytes): Immutable sequence of raw bytes, e.g., b"hello".
+
+================================== Mutable Data Types===================================
+
+Mutable objects can have their values, elements, or internal state modified in place without changing their memory address.
+
+        Lists (list): Ordered, changeable sequences, e.g., [1, 2, 3].
+
+        Dictionaries (dict): Key-value mappings, e.g., {"key": "value"}.
+
+        Sets (set): Unordered collections of unique elements, e.g., {1, 2, 3}.
+
+        Bytearrays (bytearray): Mutable sequence of raw bytes, e.g., bytearray(b"hello").
+
+
+
+#### Stage 1: Core Calculation Engine
+
+Build pure, isolated evaluation logic (functions handling math strings, safe execution, and basic error handling).
+
+Define explicit type annotations for inputs (str) and outputs (float / custom result types).
+
+#### Stage 2: Validation & Error Handling
+
+Implement strict input validation (handling division by zero, unbalanced parentheses, invalid syntax).
+
+Introduce custom Python exceptions (CalculatorError, InvalidExpressionError).
+
+#### Stage 3: Advanced Math Extensions
+
+Add support for math constants (e, pi) and trigonometric functions (sin, cos).
+
+Handle degree vs. radian conversions cleanly.
+
+#### Stage 4: CLI Interface & Interactive Loop
+
+Build the user-facing terminal interface loop (prompting input, formatting outputs, handling DEL and C actions).
+
+Wire everything together cleanly with strict mypy compliance.

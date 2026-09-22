@@ -101,8 +101,7 @@
 
 def is_palindrom_passed(string):
     formatted_string =  string.replace(" ", "").lower()
-    forward_string =  ""
-    backward_string =  ""
+    forward_string , backward_string = "", ""
     for key, _ in enumerate(formatted_string):
         forward_string += formatted_string[key]
     for key, _ in enumerate(formatted_string, start=1):

@@ -53,3 +53,13 @@ Handle degree vs. radian conversions cleanly.
 Build the user-facing terminal interface loop (prompting input, formatting outputs, handling DEL and C actions).
 
 Wire everything together cleanly with strict mypy compliance.
+
+
+
+
+
+Stage 1: Core Registry & Standardized Conversion EngineDefine the base-unit architecture ($A \to \text{Base} \to B$).Build nested conversion registries for Length (meters base) and Weight (grams base).Implement simple lookup functions using dictionaries.Stage 2: Non-Linear Conversions & Custom HandlersExtend the registry to handle non-linear formulas like Temperature ($\text{Celsius} \leftrightarrow \text{Fahrenheit} \leftrightarrow \text{Kelvin}$).Implement functional conversion handlers to handle complex mathematical formulas alongside fixed multipliers.Stage 3: Alias Normalization & Strict ValidationBuild a unit alias registry mapping shortcuts ("kg", "lb", "c", "m") to canonical names ("kilogram", "pound", "celsius", "meter").Create custom exceptions (UnitConverterError, UnknownCategoryError, UnknownUnitError, IncompatibleUnitsError) for input validation.Stage 4: Interactive CLI Loop & Dimensional ParsingBuild the interactive REPL accepting natural inputs like 100 km to miles or 32 c to f.Add support for listing available categories and units ('LIST' command).Stage 5: Test Automation SuiteWrite programmatic test suites validating edge cases (absolute zero temperature limits, negative distances, unknown unit errors).
+
+
+
+A higher-order function is a function that takes another function as an argument, or returns a function.

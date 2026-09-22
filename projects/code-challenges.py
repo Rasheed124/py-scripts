@@ -58,16 +58,39 @@
 
 
 # Count Occurrences — Given [4, 2, 7, 4, 2, 4, 9] and 4, return 3. Don't use .count().
-  
-    
-# print(cal_max_obj( frequency={2: 1, 5: 2, 3: 1, 6: 1}, max_count= None, highest_count=0))
-
-
-
-def get_occurence_number(number):
     
 
+# def get_occurence_number(numbers):
+
+#     frequency = {}
+#     heighest_count = 0
+
+#     for number in numbers:
+#         if number in frequency:
+#             frequency[number] += 1
+#         else:
+#             frequency[number] = 1
+
+#     for item in frequency:
+#         if frequency[item] > heighest_count:
+#             heighest_count = frequency[item]
+#     return heighest_count
 
 
-print(get_occurence_number([  7, 4, 2, 4, 4, 9, 9, 9]))
 
+# print(get_occurence_number([4, 2, 7, 4, 2, 4, 9]))
+
+
+
+
+# Reverse a String — Reverse a string without using [::-1] or reversed().
+
+
+def reversed_string(string):
+    new_char = ""
+    for key, char in enumerate(string, start=1):
+    # for key, char in enumerate(string, start=1):
+        new_char += string[-key]
+    return new_char
+       
+print(reversed_string("adeola"))

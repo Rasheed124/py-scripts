@@ -86,11 +86,29 @@
 # Reverse a String — Reverse a string without using [::-1] or reversed().
 
 
-def reversed_string(string):
-    new_char = ""
-    for key, _ in enumerate(string, start=1):
-        new_char += string[-key]
-    return new_char
+# def reversed_string(string):
+#     new_char = ""
+#     for key, _ in enumerate(string, start=1):
+#         new_char += string[-key]
+#     return new_char
        
-print(reversed_string("adeola"))
+# print(reversed_string("adeola"))
 
+
+# Palindrome Checker — Determine whether a string reads the same forward and backward. Ignore capitalization and spaces. For example, "Never odd or even" should return True.
+
+
+
+def is_palindrom_passed(string):
+    formatted_string =  string.replace(" ", "").lower()
+    forward_string =  ""
+    backward_string =  ""
+    for key, _ in enumerate(formatted_string):
+        forward_string += formatted_string[key]
+    for key, _ in enumerate(formatted_string, start=1):
+        backward_string += formatted_string[-key]
+
+    return True if forward_string == backward_string else False
+
+    
+print(is_palindrom_passed("Never odd or even"))

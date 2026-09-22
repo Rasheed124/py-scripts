@@ -88,9 +88,9 @@
 
 def reversed_string(string):
     new_char = ""
-    for key, char in enumerate(string, start=1):
-    # for key, char in enumerate(string, start=1):
+    for key, _ in enumerate(string, start=1):
         new_char += string[-key]
     return new_char
        
 print(reversed_string("adeola"))
+

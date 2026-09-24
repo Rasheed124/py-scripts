@@ -150,3 +150,54 @@
 
 
 # check_fizzBuzz(100)
+
+
+###### LEVEL 2
+
+# def get_word_dic(word):
+
+#     frequency = {}
+#     # count = 0
+
+#     for item in word:
+#         if item in frequency:
+#             frequency[item] += 1
+#         else:
+#             frequency[item] = 1
+#     return frequency
+
+# print(get_word_dic("Programming"))
+
+
+# Word Frequency — Given a sentence, return a dictionary containing how many times each word occurs. Ignore capitalization and basic punctuation.
+
+import string
+
+def remove_punctuation(sentence):
+    result = ""
+
+    for char in sentence:
+        if char not in string.punctuation:
+            result += char
+
+    return result
+
+def word_sentence_dic(sentence):
+
+    word_dic = {}
+
+    sentence_words  = remove_punctuation(sentence).replace(" ", "").lower()
+
+    for word in sentence_words:
+        if word in word_dic:
+            word_dic[word]  += 1
+        else:
+            word_dic[word] = 1
+
+    return word_dic
+
+print(word_sentence_dic("I like eating amala and okro fried-soup, with cold drinks"))
+
+
+
+# sentence = "I like eating amala and okro fried-soup, with cold drinks"

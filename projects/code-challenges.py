@@ -282,4 +282,4 @@ def find_missing_number(lists):
     return missing_number
 
 
-print([1, 2, 3, 5, 6])
+print(find_missing_number([1, 2, 3, 4, 5, 7, 8, 9, 10]))

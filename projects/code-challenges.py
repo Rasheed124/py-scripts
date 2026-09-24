@@ -171,13 +171,26 @@
 
 # Word Frequency — Given a sentence, return a dictionary containing how many times each word occurs. Ignore capitalization and basic punctuation.
 
-import string
+# import string
+
+# def remove_punctuation(sentence):
+#     result = ""
+
+#     for char in sentence:
+#         if char not in string.punctuation:
+#             result += char
+
+#     return result
+
 
 def remove_punctuation(sentence):
+
+    non_characters = {',', '-', '@', '.', '!', '?', ':', ';'}
+
     result = ""
 
     for char in sentence:
-        if char not in string.punctuation:
+        if char not in non_characters:
             result += char
 
     return result
@@ -196,8 +209,77 @@ def word_sentence_dic(sentence):
 
     return word_dic
 
-print(word_sentence_dic("I like eating amala and okro fried-soup, with cold drinks"))
+# print(word_sentence_dic("I like eating amala and okro fried-soup, with cold drinks"))
 
 
 
-# sentence = "I like eating amala and okro fried-soup, with cold drinks"
+# Remove Duplicates While Preserving Order — [4, 2, 4, 1, 2, 8] should become [4, 2, 1, 8]. Don't simply convert the entire list to a set because order matters.
+
+
+# def remove_duplicate(list):
+
+#     new_list = []
+#     for num in list:
+#         if num not in new_list:
+#             new_list.append(num)
+#         else:
+#             continue
+#     return new_list
+
+# print(remove_duplicate([4, 2, 4, 1, 2, 8]))
+
+
+# def remove_duplicate(list):
+
+#     list_dic = {}
+#     for num in list:
+#         if num in list_dic:
+#             list_dic[num] += 1
+#         else:
+#             list_dic[num] = 1
+#     return list_dic
+
+# remove_duplicate([4, 2, 4, 1, 2, 8])
+
+
+
+
+# Common Elements — Given two lists, return values occurring in both without duplicates. Solve it once using loops and once using sets.
+
+# with loop
+
+# with set
+# def common_elements(list1, list2):
+
+#     common_element = []
+#     element2 = set(list2)
+
+#     for num in list1:
+#         if num in element2 and num not in common_element:
+#             common_element.append(num)
+
+
+#     return common_element
+
+# print(common_elements([2, 4, 6, 8, 10, 4], [1, 3, 4, 6, 9, 10, 6]))
+
+
+# Missing Number — You're given numbers from 1 to n, but exactly one number is missing. Example: [1, 2, 3, 5, 6] → 4. Try solving it without sorting first. Missing-number challenges are also common in Python challenge sets.
+
+
+
+def find_missing_number(lists):
+
+    new_num_list= []
+    missing_number = []
+
+    for key in range(lists[0], lists[-1]+1):
+        new_num_list.append(key)
+    for num in new_num_list:
+        if num not in lists:
+            missing_number.append(num)
+
+    return missing_number
+
+
+print([1, 2, 3, 5, 6])

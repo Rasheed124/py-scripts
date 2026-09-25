@@ -302,18 +302,18 @@ def word_sentence_dic(sentence):
 # print(cal_max([4, 12, 7, 25, 9, 18 ,100 ,30]))
 
 # Split Even and Odd — Given a list of integers, return a dictionary such as {"even": [...], "odd": [...]}.
-def cal_max(numbers) -> int:
-    highest_number =  numbers[0]
-    second_highest_number =  0
+def get_integer_dict(lists) -> dict:
 
-    for number in numbers:
-        if number > highest_number:
-            highest_number = number
-        for number in numbers:
-            if number > second_highest_number and highest_number > number:
-                second_highest_number = number
+    integer_dict =  {'even': [], 'odd' : []}
 
-    return second_highest_number
-    
-print(cal_max([4, 12, 7, 25, 9, 18 ,100 ,30]))
+    for num in lists:
+        if num % 2 == 0 and num != 0:
+            integer_dict['even'].append(num)
+        elif num % 2 != 0 and num != 0:
+            integer_dict['odd'].append(num)
+        else:
+            continue
+    return integer_dict
+
+print(get_integer_dict([4, 12, 7, 25, 9, 18 ,100, 300, 1000, 0 ,30]))
 

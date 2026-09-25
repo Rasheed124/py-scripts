@@ -268,18 +268,52 @@ def word_sentence_dic(sentence):
 
 
 
-def find_missing_number(lists):
+# def find_missing_number(lists):
 
-    new_num_list= []
-    missing_number = []
+#     new_num_list= []
+#     missing_number = []
 
-    for key in range(lists[0], lists[-1]+1):
-        new_num_list.append(key)
-    for num in new_num_list:
-        if num not in lists:
-            missing_number.append(num)
+#     for key in range(lists[0], lists[-1]+1):
+#         new_num_list.append(key)
+#     for num in new_num_list:
+#         if num not in lists:
+#             missing_number.append(num)
 
-    return missing_number
+#     return missing_number
+
+# print(find_missing_number([1, 2, 3, 4, 5, 7, 8, 9, 10]))
 
 
-print(find_missing_number([1, 2, 3, 4, 5, 7, 8, 9, 10]))
+#  **Second Largest Unique Number** — `[10, 5, 8, 10, 9] → 9`. Handle duplicates correctly.
+
+# def cal_max(numbers) -> int:
+#     highest_number =  numbers[0]
+#     second_highest_number =  0
+
+#     for number in numbers:
+#         if number > highest_number:
+#             highest_number = number
+#         for number in numbers:
+#             if number > second_highest_number and highest_number > number:
+#                 second_highest_number = number
+
+#     return second_highest_number
+    
+# print(cal_max([4, 12, 7, 25, 9, 18 ,100 ,30]))
+
+# Split Even and Odd — Given a list of integers, return a dictionary such as {"even": [...], "odd": [...]}.
+def cal_max(numbers) -> int:
+    highest_number =  numbers[0]
+    second_highest_number =  0
+
+    for number in numbers:
+        if number > highest_number:
+            highest_number = number
+        for number in numbers:
+            if number > second_highest_number and highest_number > number:
+                second_highest_number = number
+
+    return second_highest_number
+    
+print(cal_max([4, 12, 7, 25, 9, 18 ,100 ,30]))
+

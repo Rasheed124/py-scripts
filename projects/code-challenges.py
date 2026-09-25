@@ -302,18 +302,52 @@ def word_sentence_dic(sentence):
 # print(cal_max([4, 12, 7, 25, 9, 18 ,100 ,30]))
 
 # Split Even and Odd — Given a list of integers, return a dictionary such as {"even": [...], "odd": [...]}.
-def get_integer_dict(lists) -> dict:
+# def get_integer_dict(lists) -> dict:
 
-    integer_dict =  {'even': [], 'odd' : []}
+#     integer_dict =  {'even': [], 'odd' : []}
 
-    for num in lists:
-        if num % 2 == 0 and num != 0:
-            integer_dict['even'].append(num)
-        elif num % 2 != 0 and num != 0:
-            integer_dict['odd'].append(num)
-        else:
-            continue
-    return integer_dict
+#     for num in lists:
+#         if num % 2 == 0 and num != 0:
+#             integer_dict['even'].append(num)
+#         elif num % 2 != 0 and num != 0:
+#             integer_dict['odd'].append(num)
+#         else:
+#             continue
+#     return integer_dict
 
-print(get_integer_dict([4, 12, 7, 25, 9, 18 ,100, 300, 1000, 0 ,30]))
+# print(get_integer_dict([4, 12, 7, 25, 9, 18 ,100, 300, 1000, 0 ,30]))
+
+
+
+dict_one = {
+    "apple": 3,
+    "banana": 2,
+    "mango": 7,
+    "grape": 4
+}
+
+dict_two = {
+    "banana": 4,
+    "orange": 5,
+    "apple": 2,
+    "watermelon": 3
+}
+
+def merge_dictionaries(dict_one, dict_two):
+
+    merged_dic = {}
+
+    for key, value in dict_one.items():
+        merged_dic[key] = value
+        for key, value in dict_two.items():
+            if key not in  merged_dic:
+                merged_dic[key] = value
+            else:
+                continue
+    return merged_dic
+        
+      
+print(merge_dictionaries(dict_one=dict_one, dict_two=dict_two))
+
+
 

@@ -319,35 +319,211 @@ def word_sentence_dic(sentence):
 
 
 
-dict_one = {
-    "apple": 3,
-    "banana": 2,
-    "mango": 7,
-    "grape": 4
-}
+# dict_one = {
+#     "apple": 3,
+#     "banana": 2,
+#     "mango": 7,
+#     "grape": 4
+# }
 
-dict_two = {
-    "banana": 4,
-    "orange": 5,
-    "apple": 2,
-    "watermelon": 3
-}
+# dict_two = {
+#     "banana": 4,
+#     "orange": 5,
+#     "apple": 2,
+#     "watermelon": 3
+# }
 
-def merge_dictionaries(dict_one, dict_two):
+# def merge_dictionaries(dict_one, dict_two):
 
-    merged_dic = {}
+#     merged_dic = {}
 
-    for key, value in dict_one.items():
-        merged_dic[key] = value
-        for key, value in dict_two.items():
-            if key not in  merged_dic:
-                merged_dic[key] = value
-            else:
-                continue
-    return merged_dic
+#     for key, value in dict_one.items():
+#         merged_dic[key] = value
+#         for key, value in dict_two.items():
+#             if key not in  merged_dic:
+#                 merged_dic[key] = value
+#             else:
+#                 continue
+#     return merged_dic
         
       
-print(merge_dictionaries(dict_one=dict_one, dict_two=dict_two))
+# print(merge_dictionaries(dict_one=dict_one, dict_two=dict_two))
 
 
+
+
+
+# Level 3 — Functions + Real Data Manipulation
+
+
+students = [
+    {"name": "Ada", "age": 22, "score": 88},
+    {"name": "David", "age": 19, "score": 72},
+    {"name": "bola", "age": 19, "score": 72},
+    {"name": "Grace", "age": 24, "score": 95},
+    {"name": "John", "age": 21, "score": 67},
+    {"name": "Mary", "age": 20, "score": 88},
+]
+
+
+# Best Student — Return the dictionary representing the student with the highest score. Use max() with key= rather than manually looping.
+
+# def sort_student_by_score(students):
+
+
+#     student = max(students, key=lambda x: x['score'] )
+
+#     return student
+
+# print(sort_student_by_score(students=students))
+
+
+
+# Youngest Student — Find the youngest student using min(key=...).
+
+# def get_student_with_youngest_age(students):
+
+
+#     student = min(students, key=lambda x: x['age'] )
+
+#     return student
+
+# print(get_student_with_youngest_age(students=students))
+
+
+
+# Rank Students — Sort students from highest to lowest score. If two students have equal scores, sort those students alphabetically by name.
+
+# def sort_student_by_score():
+
+#     students.sort(key=lambda student: (-student['score'], student['name']))
+
+#     return students
+
+
+# print(sort_student_by_score())
+
+
+# Passing Students — Return students with scores of at least 70. Solve once with a comprehension and once with filter()
+
+# def get_Student_age_seventy():
+    # result = [student for student in students if student['age'] <= 70 ]
+
+    # print(result)
+    # result = list(filter(lambda student: student['age'] <= 70, students))
+
+    # return result
+
+# print(get_Student_age_seventy())
+
+# Extract Names — Convert the students into ["Ada", "David", ...] using map().
+
+# def get_students_names():
+
+#     result = list(map(lambda student: student['name'], students))
+
+#     return result
+
+# print(get_students_names())
+
+
+# Everybody Passed? — Use all() to determine whether every student scored at least 50.
+
+# def check_if_student_below_fifty():
+
+#     return all(student['score'] <= 50 for student in students )
+
+# print(get_student_below_fifty())
+
+# Any Excellent Student? — Use any() to determine whether at least one student scored 90 or higher.
+
+# def check_if_student_scored_90_or_higher():
+
+#     return any(student['score'] >= 90 for student in students )
+
+# print(check_if_student_scored_90_or_higher())
+
+
+# Class Average — Calculate the average score. Then return all students whose scores are above that average.
+
+# from functools import reduce
+
+# import math
+
+# def check_average_score():
+
+#     total_score = list(map(lambda student: student['score'], students))
+    
+#     total_score = reduce(lambda x, y:  int(x) + int(y), total_score)
+
+#     avg = math.floor(total_score / len(students))
+
+#     required_students = list(filter(lambda student: student['score'] > avg, students))
+
+#     return required_students
+
+    
+# print(check_average_score())
+
+
+
+#################################################################   Level 4 — HOF Workout ############################################################
+
+# Product Using reduce() — Given [2, 3, 4, 5], calculate 120 using reduce(). Then write the same operation using an ordinary loop and compare readability.
+
+from functools import reduce
+
+# def calc_total_items(numbers):
+
+#     # result = reduce(lambda x, y: x + y, numbers)
+#     # return result
+#     result = 0
+
+#     for num in numbers:
+#         result += num
+#     return result
+
+# print(calc_total_items([2, 3, 4, 5]))
+
+
+# Longest Word Using reduce() — Given ["cat", "elephant", "tiger", "hippopotamus"], use reduce() to determine the longest word.
+
+# def calc_longest_word(words):
+
+#     result = reduce(lambda x, y: x if len(x) > len(y) else y, words )
+#     return result
+
+
+# print(calc_longest_word(["cat", "elephant", "tiger", "hippopotamus"]))
+
+
+# Clean and Transform — Given: Use filter() and map() to keep only positive even numbers and square them. Expected result: [64, 144, 400].
+
+# numbers = [3, -1, 8, -5, 12, 7, 0, 20]
+
+# def get_nums_and_square(numbers):
+
+#     filtered_nums = list(filter(lambda num : num > 0 and num % 2 == 0, numbers))
+#     result = list(map(lambda num : num ** 2, filtered_nums))
+
+#     return result
+
+# print(get_nums_and_square([3, -1, 8, -5, 12, 7, 0, 20]))
+
+
+# Pair Names and Scores — Given:
+
+names = ["Ada", "David", "Grace"]
+scores = [88, 72, 95]
+
+
+def covert_to_dict(names, scores):
+
+    result = {}
+
+    for name, value in zip(names,scores):
+        result[name] = value
+       
+    return result
+print(covert_to_dict(["Ada", "David", "Grace"], [88, 72, 95]))
 

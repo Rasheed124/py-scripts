@@ -513,17 +513,56 @@ from functools import reduce
 
 # Pair Names and Scores — Given:
 
-names = ["Ada", "David", "Grace"]
-scores = [88, 72, 95]
+# names = ["Ada", "David", "Grace"]
+# scores = [88, 72, 95]
 
 
-def covert_to_dict(names, scores):
+# def covert_to_dict(names, scores):
 
-    result = {}
+#     result = {}
 
-    for name, value in zip(names,scores):
-        result[name] = value
+#     for name, value in zip(names,scores):
+#         result[name] = value
        
-    return result
-print(covert_to_dict(["Ada", "David", "Grace"], [88, 72, 95]))
+#     return result
+# print(covert_to_dict(["Ada", "David", "Grace"], [88, 72, 95]))
+
+
+# Indexed Ranking — Given names already sorted by score, use enumerate() to produce strings like "1. Grace", "2. Ada", "3. David"
+
+# def indexed_ranking(names):
+
+#     result = []
+#     for index, name in enumerate(names, start=1):
+#         value =  f"{index}, {name}"
+#         result.append(value)
+#     return result
+
+# print(indexed_ranking( ["Grace", "Ada", "David", "Mary", "John"]))
+
+
+# Original price:       1000
+# Tax:                  7.5%
+# Discount:             10%
+
+from functools import partial
+
+# tax_amount = discounted_price × tax_rate
+def calculate_price(price, discount, tax_rate):
+
+    discount_amount = float(f"{price * discount}")
+
+    discounted_price = price - discount_amount
+
+    tax_amount =  float(f"{discounted_price * tax_rate}")
+
+    final_price = discounted_price + tax_amount
+
+    return final_price
+
+calc_tax_rate = partial(calculate_price, tax_rate=0.075)    
+print(calc_tax_rate(1000, 0.10))
+
+
+
 

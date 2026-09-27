@@ -545,24 +545,125 @@ from functools import reduce
 # Tax:                  7.5%
 # Discount:             10%
 
-from functools import partial
+# from functools import partial
 
-# tax_amount = discounted_price × tax_rate
-def calculate_price(price, discount, tax_rate):
+# def calculate_price(price, discount, tax_rate):
 
-    discount_amount = float(f"{price * discount}")
+#     discount_amount = float(f"{price * discount}")
 
-    discounted_price = price - discount_amount
+#     discounted_price = price - discount_amount
 
-    tax_amount =  float(f"{discounted_price * tax_rate}")
+#     tax_amount =  float(f"{discounted_price * tax_rate}")
 
-    final_price = discounted_price + tax_amount
+#     final_price = discounted_price + tax_amount
 
-    return final_price
+#     return final_price
 
-calc_tax_rate = partial(calculate_price, tax_rate=0.075)    
-print(calc_tax_rate(1000, 0.10))
+# calc_tax_rate = partial(calculate_price, tax_rate=0.075)    
+# print(calc_tax_rate(1000, 0.10))
+# print(calc_tax_rate(3000, 0.30))
 
+
+
+
+######################################################################## Level 5 — Multi-Step Problems
+
+
+# Create a function that determines the most expensive product, cheapest product, products currently in stock, total inventory value (price * stock), whether any product is out of stock, and whether every product costs less than $2,000.
+
+products = [
+    {"name": "Laptop", "price": 1200, "stock": 4},
+    {"name": "Mouse", "price": 25, "stock": 0},
+    {"name": "Keyboard", "price": 75, "stock": 12},
+    {"name": "Monitor", "price": 300, "stock": 5},
+    {"name": "USB Cable", "price": 10, "stock": 30},
+]
+
+
+def get_expensive_product():
+
+    result = reduce(lambda x, y :  x if x['price'] > y['price'] else y, products )
+
+    return f"{result['name']:} { result['price']}"
+
+# print(get_expensive_product())
+
+def get_cheapest_product():
+
+    result = reduce(lambda x, y :  x if x['price'] < y['price'] else y, products )
+
+    return f"{result['name']}: {result['price']}"
+
+# print(get_cheapest_product())
+
+
+# def get_products_in_stock():
+
+#     result = list(filter(lambda product :  product['stock'] > 0, products ))
+
+#     return result
+
+# print(get_products_in_stock())
+
+from functools import reduce
+def calc_total_inventory_value():
+
+    inventory_list = list(map(lambda product: product['price'] * product['stock'], products ))
+
+    result =  reduce(lambda x, y : x + y, inventory_list) 
+
+    return f"${result}"
+
+# print(calc_total_inventory_value())
+
+
+def check_product_is_in_stock():
+
+    # print(any(product['stock'] <= 0 for product in products))
+
+    print(all(product['stock'] > 2000 for product in products))
+
+check_product_is_in_stock()
+
+
+
+
+
+cart = [
+    {"name": "Laptop Bag", "price": 85, "quantity": 2},
+    {"name": "Wireless Mouse", "price": 40, "quantity": 3},
+    {"name": "Keyboard", "price": 75, "quantity": 1},
+    {"name": "Monitor", "price": 250, "quantity": 2},
+    {"name": "USB Cable", "price": 15, "quantity": 4},
+]
+
+def calc_cart_items():
+
+    result = {"items": []}
+
+
+    items = list(map(lambda product: product['name'], cart ))
+    item_sub_total = list(map(lambda product: product['price'] * product['quantity'], cart ))
+
+    sub_total =   reduce(lambda x, y : x + y, item_sub_total) 
+
+    discount_amount = 0
+    if sub_total > 500:
+        sub_total * 0.10
+        discount_amount = sub_total
+    else:
+        discount_amount = 0
+
+    return discount_amount, sub_total  
+
+    # tax_price =  sub_total * 0.075
+
+    # final_amount  =  tax_price
+
+
+    # return {"items" : [item for item in items] , "subtotal" : sub_total}
+
+print(calc_cart_items())
 
 
 

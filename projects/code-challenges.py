@@ -667,7 +667,7 @@ def calc_cart_items():
     return result
 
 
-print(calc_cart_items())
+# print(calc_cart_items())
 
 
 
@@ -731,7 +731,7 @@ def duplicate_checker(paragraph):
     return result
 
 
-print(duplicate_checker(paragraph=paragraph))
+# print(duplicate_checker(paragraph=paragraph))
 
 
 
@@ -747,18 +747,26 @@ transactions = [
 
 def calc_transactions(transactions):
 
+    result = {}
 
-    frequency = {}
+    total_withdrawal = reduce( lambda total, transaction: total + transaction[1] if transaction[0] == "withdrawal" else total,transactions, 0)
+    total_deposit = reduce( lambda total, transaction: total + transaction[1] if transaction[0] == "deposit" else total,transactions, 0)
+    final_balance = total_deposit - total_withdrawal
+    largest_transaction = reduce( lambda transacA, transacB: transacA  if transacA[1] > transacB[1] else transacB, transactions)
 
-    for transaction in transactions:
-        if transaction in frequency:
-            frequency[transaction] += 1
-        else:
-            frequency[transaction] = 1
-
-    return frequency
+    number_of_withdrawal = reduce( lambda total, transaction: total + 1 if transaction[0] == "withdrawal" else total ,transactions, 0)
 
 
-print(calc_transactions)
+    result['total_withdrawal'] = total_withdrawal
+    result['total_deposit'] = total_deposit
+    result['final_balance'] = final_balance
+    result['largest_transaction'] = largest_transaction[1]
+    result['number_of_withdrawal'] = number_of_withdrawal
+
+
+    return result
+
+
+print(calc_transactions(transactions=transactions))
 
 

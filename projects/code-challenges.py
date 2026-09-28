@@ -617,13 +617,13 @@ def calc_total_inventory_value():
 # print(calc_total_inventory_value())
 
 
-def check_product_is_in_stock():
+# def check_product_is_in_stock():
 
-    # print(any(product['stock'] <= 0 for product in products))
+#     # print(any(product['stock'] <= 0 for product in products))
 
-    print(all(product['stock'] > 2000 for product in products))
+#     print(all(product['stock'] > 2000 for product in products))
 
-check_product_is_in_stock()
+# check_product_is_in_stock()
 
 
 
@@ -639,8 +639,7 @@ cart = [
 
 def calc_cart_items():
 
-    result = {"items": []}
-
+    result = {}
 
     items = list(map(lambda product: product['name'], cart ))
     item_sub_total = list(map(lambda product: product['price'] * product['quantity'], cart ))
@@ -649,21 +648,117 @@ def calc_cart_items():
 
     discount_amount = 0
     if sub_total > 500:
-        sub_total * 0.10
-        discount_amount = sub_total
+       discount_amount=  sub_total * 0.10
     else:
         discount_amount = 0
 
-    return discount_amount, sub_total  
+    discounted_price = sub_total - discount_amount
 
-    # tax_price =  sub_total * 0.075
+    tax_amount =  float(f"{discounted_price * 0.075}")
 
-    # final_amount  =  tax_price
+    final_price = discounted_price + tax_amount
 
+    result["items"] = items
+    result["subtotal"] = sub_total
+    result["discount"] = discount_amount
+    result["tax-amount"] = tax_amount
+    result["final_amount"] = final_price
 
-    # return {"items" : [item for item in items] , "subtotal" : sub_total}
+    return result
+
 
 print(calc_cart_items())
 
+
+
+votes = [
+    "Python",
+    "JavaScript",
+    "Python",
+    "C++",
+    "Python",
+    "JavaScript",
+    "Go",
+    "Python"
+]
+
+
+def count_votes(votes):
+    vote_counts = {}
+
+    for vote in votes:
+        if vote in vote_counts:
+            vote_counts[vote] += 1
+        else:
+            vote_counts[vote] = 1
+
+    results = list(vote_counts.items())
+
+    results = sorted(results, key=lambda x: (-x[1], x[0]))
+
+    return results
+
+# print(count_votes(votes))
+
+
+import string
+paragraph = "Python is fun, and Python is powerful. I enjoy learning Python! Programming is fun; learning takes practice, but practice makes programming easier."
+
+def duplicate_checker(paragraph):
+
+    frequency_check = {}
+    cleaned_paragraph = ""
+
+    punctuation = string.punctuation
+    for char in paragraph:
+        if char not in punctuation:
+            cleaned_paragraph += char
+
+
+    split_paragraph =  cleaned_paragraph.lower().split()
+
+    for word in split_paragraph:
+        if word in frequency_check:
+            frequency_check[word] += 1
+        else:
+            frequency_check[word] = 1
+
+
+    aranaged_words = list(frequency_check.items())
+
+    result = sorted(aranaged_words, key=lambda x: (-x[1], x[0]))
+
+    return result
+
+
+print(duplicate_checker(paragraph=paragraph))
+
+
+
+transactions = [
+    ("deposit", 500),
+    ("withdrawal", 120),
+    ("deposit", 300),
+    ("withdrawal", 50),
+    ("withdrawal", 100),
+]
+
+
+
+def calc_transactions(transactions):
+
+
+    frequency = {}
+
+    for transaction in transactions:
+        if transaction in frequency:
+            frequency[transaction] += 1
+        else:
+            frequency[transaction] = 1
+
+    return frequency
+
+
+print(calc_transactions)
 
 

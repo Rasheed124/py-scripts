@@ -48,7 +48,7 @@
 # Executing a Module as a Script - fact
 from fact import fact
 
-print(fact(5))
+# print(fact(5))
 
 
 
@@ -60,8 +60,8 @@ import mod
 
 import mod
 
-import importlib
-importlib.reload(mod)
+# import importlib
+# importlib.reload(mod)
 
 
 # Python Packages
@@ -119,3 +119,7 @@ importlib.reload(mod)
 #   File "<pyshell#37>", line 1, in <module>
 #     Foo
 # NameError: name 'Foo' is not defined
+
+
+import sys
+sys.path

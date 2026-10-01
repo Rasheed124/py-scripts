@@ -767,6 +767,96 @@ def calc_transactions(transactions):
     return result
 
 
-print(calc_transactions(transactions=transactions))
+# print(calc_transactions(transactions=transactions))
 
 
+def anagrams_group(lists):
+    sorted_list = sorted(lists, key=lambda word: sorted(word))
+
+    result = []
+    word_group = []
+
+    for word in sorted_list:
+        if not word_group:
+            word_group.append(word)
+
+        elif sorted(word) == sorted(word_group[0]):
+            word_group.append(word)
+
+        else:
+            result.append(word_group)
+            word_group = [word]
+
+    result.append(word_group)
+
+    return result
+
+
+lists = ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+# print(anagrams_group(lists))
+
+
+lists_digit = [[1, 2], [3, 4], [5], [6, 7, 8]]
+
+# result  = sorted(lists_digit, key=lambda digit : sorted(digit))
+# print(result)
+
+def flated_list_getter(list):
+    new_digit_list = [digit for digit_group in list for digit in digit_group]
+    return new_digit_list
+
+    # for digit_group in list:
+    #     for digit in digit_group:
+    #         new_digit_list.append(digit)
+    # return new_digit_list
+
+
+lists_digit = [[1, 2], [3, 4], [5], [6, 7, 8]]
+
+# print(flated_list_getter(lists_digit))
+
+
+
+
+# from functools import reduce
+
+# lists_digit = [[1, 2], [3, 4], [5], [6, 7, 8]]
+
+result = reduce(
+    lambda total, current: total + current,
+    lists_digit,
+    0
+)
+
+print(result)
+
+# print([1, 2] + [3, 4])
+
+
+students = [
+    {
+        "name": "Ada",
+        "scores": [85, 92, 78, 90, 88]
+    },
+    {
+        "name": "David",
+        "scores": [67, 72, 70, 65, 74]
+    },
+    {
+        "name": "Grace",
+        "scores": [95, 91, 96, 89, 93]
+    },
+    {
+        "name": "John",
+        "scores": [55, 60, 48, 62, 58]
+    },
+    {
+        "name": "Mary",
+        "scores": [76, 81, 79, 84, 80]
+    },
+    {
+        "name": "Samuel",
+        "scores": [42, 38, 50, 45, 40]
+    }
+]

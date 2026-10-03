@@ -1,4 +1,5 @@
 
+from functools import reduce
 
 
 # def is_even(n):
@@ -152,7 +153,7 @@
 # check_fizzBuzz(100)
 
 
-###### LEVEL 2
+########################################################################### LEVEL 2 #############################################################################
 
 # def get_word_dic(word):
 
@@ -353,7 +354,7 @@ def word_sentence_dic(sentence):
 
 
 
-# Level 3 — Functions + Real Data Manipulation
+####################################################################################### Level 3 — Functions + Real Data Manipulation #########################################
 
 
 students = [
@@ -368,102 +369,102 @@ students = [
 
 # Best Student — Return the dictionary representing the student with the highest score. Use max() with key= rather than manually looping.
 
-# def sort_student_by_score(students):
+def sort_student_by_score(students):
 
 
-#     student = max(students, key=lambda x: x['score'] )
+    student = max(students, key=lambda x: x['score'] )
 
-#     return student
+    return student
 
-# print(sort_student_by_score(students=students))
+print(sort_student_by_score(students=students))
 
 
 
 # Youngest Student — Find the youngest student using min(key=...).
 
-# def get_student_with_youngest_age(students):
+def get_student_with_youngest_age(students):
 
 
-#     student = min(students, key=lambda x: x['age'] )
+    student = min(students, key=lambda x: x['age'] )
 
-#     return student
+    return student
 
-# print(get_student_with_youngest_age(students=students))
+print(get_student_with_youngest_age(students=students))
 
 
 
 # Rank Students — Sort students from highest to lowest score. If two students have equal scores, sort those students alphabetically by name.
 
-# def sort_student_by_score():
+def sort_student_by_score():
 
-#     students.sort(key=lambda student: (-student['score'], student['name']))
+    students.sort(key=lambda student: (-student['score'], student['name']))
 
-#     return students
+    return students
 
 
-# print(sort_student_by_score())
+print(sort_student_by_score())
 
 
 # Passing Students — Return students with scores of at least 70. Solve once with a comprehension and once with filter()
 
-# def get_Student_age_seventy():
-    # result = [student for student in students if student['age'] <= 70 ]
+def get_Student_age_seventy():
+    result = [student for student in students if student['age'] <= 70 ]
 
-    # print(result)
-    # result = list(filter(lambda student: student['age'] <= 70, students))
+    print(result)
+    result = list(filter(lambda student: student['age'] <= 70, students))
 
-    # return result
+    return result
 
-# print(get_Student_age_seventy())
+print(get_Student_age_seventy())
 
 # Extract Names — Convert the students into ["Ada", "David", ...] using map().
 
-# def get_students_names():
+def get_students_names():
 
-#     result = list(map(lambda student: student['name'], students))
+    result = list(map(lambda student: student['name'], students))
 
-#     return result
+    return result
 
-# print(get_students_names())
+print(get_students_names())
 
 
 # Everybody Passed? — Use all() to determine whether every student scored at least 50.
 
-# def check_if_student_below_fifty():
+def check_if_student_below_fifty():
 
-#     return all(student['score'] <= 50 for student in students )
+    return all(student['score'] >= 50 for student in students )
 
-# print(get_student_below_fifty())
+print(check_if_student_below_fifty())
 
 # Any Excellent Student? — Use any() to determine whether at least one student scored 90 or higher.
 
-# def check_if_student_scored_90_or_higher():
+def check_if_student_scored_90_or_higher():
 
-#     return any(student['score'] >= 90 for student in students )
+    return any(student['score'] >= 90 for student in students )
 
-# print(check_if_student_scored_90_or_higher())
+print(check_if_student_scored_90_or_higher())
 
 
 # Class Average — Calculate the average score. Then return all students whose scores are above that average.
 
-# from functools import reduce
+from functools import reduce
 
-# import math
+import math
 
-# def check_average_score():
+def check_average_score():
 
-#     total_score = list(map(lambda student: student['score'], students))
+    total_score = list(map(lambda student: student['score'], students))
     
-#     total_score = reduce(lambda x, y:  int(x) + int(y), total_score)
+    total_score = reduce(lambda x, y:  int(x) + int(y), total_score)
 
-#     avg = math.floor(total_score / len(students))
+    avg = math.floor(total_score / len(students))
 
-#     required_students = list(filter(lambda student: student['score'] > avg, students))
+    required_students = list(filter(lambda student: student['score'] > avg, students))
 
-#     return required_students
+    return required_students
 
     
-# print(check_average_score())
+print(check_average_score())
 
 
 
@@ -473,100 +474,104 @@ students = [
 
 from functools import reduce
 
-# def calc_total_items(numbers):
+def calc_total_items(numbers):
 
-#     # result = reduce(lambda x, y: x + y, numbers)
-#     # return result
-#     result = 0
+    reduce_result = reduce(lambda x, y: x * y, numbers)
 
-#     for num in numbers:
-#         result += num
-#     return result
+    loop_result = 1
 
-# print(calc_total_items([2, 3, 4, 5]))
+    for num in numbers:
+        loop_result *= num
+
+    return reduce_result, loop_result
+
+
+result = calc_total_items([2, 3, 4, 5])
+print("Using reduce():", result[0])
+print("Using loop:", result[1])
 
 
 # Longest Word Using reduce() — Given ["cat", "elephant", "tiger", "hippopotamus"], use reduce() to determine the longest word.
 
-# def calc_longest_word(words):
+def calc_longest_word(words):
 
-#     result = reduce(lambda x, y: x if len(x) > len(y) else y, words )
-#     return result
+    result = reduce(lambda x, y: x if len(x) > len(y) else y, words )
+    return result
 
 
-# print(calc_longest_word(["cat", "elephant", "tiger", "hippopotamus"]))
+print(calc_longest_word(["cat", "elephant", "tiger", "hippopotamus"]))
 
 
 # Clean and Transform — Given: Use filter() and map() to keep only positive even numbers and square them. Expected result: [64, 144, 400].
 
-# numbers = [3, -1, 8, -5, 12, 7, 0, 20]
+numbers = [3, -1, 8, -5, 12, 7, 0, 20]
 
-# def get_nums_and_square(numbers):
+def get_nums_and_square(numbers):
 
-#     filtered_nums = list(filter(lambda num : num > 0 and num % 2 == 0, numbers))
-#     result = list(map(lambda num : num ** 2, filtered_nums))
+    filtered_nums = list(filter(lambda num : num > 0 and num % 2 == 0, numbers))
+    result = list(map(lambda num : num ** 2, filtered_nums))
 
-#     return result
+    return result
 
-# print(get_nums_and_square([3, -1, 8, -5, 12, 7, 0, 20]))
+print(get_nums_and_square([3, -1, 8, -5, 12, 7, 0, 20]))
 
 
 # Pair Names and Scores — Given:
 
-# names = ["Ada", "David", "Grace"]
-# scores = [88, 72, 95]
+names = ["Ada", "David", "Grace"]
+scores = [88, 72, 95]
 
 
-# def covert_to_dict(names, scores):
+def covert_to_dict(names, scores):
 
-#     result = {}
+    result = {}
 
-#     for name, value in zip(names,scores):
-#         result[name] = value
+    for name, value in zip(names,scores):
+        result[name] = value
        
-#     return result
-# print(covert_to_dict(["Ada", "David", "Grace"], [88, 72, 95]))
+    return result
+print(covert_to_dict(["Ada", "David", "Grace"], [88, 72, 95]))
 
 
 # Indexed Ranking — Given names already sorted by score, use enumerate() to produce strings like "1. Grace", "2. Ada", "3. David"
 
-# def indexed_ranking(names):
+def indexed_ranking(names):
 
-#     result = []
-#     for index, name in enumerate(names, start=1):
-#         value =  f"{index}, {name}"
-#         result.append(value)
-#     return result
+    result = []
+    for index, name in enumerate(names, start=1):
+        value =  f"{index}. {name}"
+        result.append(value)
+    return result
 
-# print(indexed_ranking( ["Grace", "Ada", "David", "Mary", "John"]))
+print(indexed_ranking( ["Grace", "Ada", "David", "Mary", "John"]))
 
 
 # Original price:       1000
 # Tax:                  7.5%
 # Discount:             10%
 
-# from functools import partial
+from functools import partial
 
-# def calculate_price(price, discount, tax_rate):
+def calculate_price(price, discount, tax_rate):
 
-#     discount_amount = float(f"{price * discount}")
+    discount_amount = float(f"{price * discount}")
 
-#     discounted_price = price - discount_amount
+    discounted_price = price - discount_amount
 
-#     tax_amount =  float(f"{discounted_price * tax_rate}")
+    tax_amount =  float(f"{discounted_price * tax_rate}")
 
-#     final_price = discounted_price + tax_amount
+    final_price = discounted_price + tax_amount
 
-#     return final_price
+    return final_price
 
-# calc_tax_rate = partial(calculate_price, tax_rate=0.075)    
-# print(calc_tax_rate(1000, 0.10))
-# print(calc_tax_rate(3000, 0.30))
-
-
+calc_tax_rate = partial(calculate_price, tax_rate=0.075)    
+print(calc_tax_rate(1000, 0.10))
+print(calc_tax_rate(3000, 0.30))
 
 
-######################################################################## Level 5 — Multi-Step Problems
+
+
+######################################################################## Level 5 — Multi-Step Problems ######################################################################
 
 
 # Create a function that determines the most expensive product, cheapest product, products currently in stock, total inventory value (price * stock), whether any product is out of stock, and whether every product costs less than $2,000.
@@ -617,13 +622,18 @@ def calc_total_inventory_value():
 # print(calc_total_inventory_value())
 
 
-# def check_product_is_in_stock():
+def check_product_is_in_stock():
 
-#     # print(any(product['stock'] <= 0 for product in products))
+    print(any(product['stock'] == 0 for product in products))
 
-#     print(all(product['stock'] > 2000 for product in products))
+check_product_is_in_stock()
 
-# check_product_is_in_stock()
+
+def check_product_is_less_than_2kdolls():
+
+    print(all(product['price'] <  2000 for product in products))
+
+check_product_is_less_than_2kdolls()
 
 
 
@@ -668,8 +678,6 @@ def calc_cart_items():
 
 
 # print(calc_cart_items())
-
-
 
 votes = [
     "Python",
@@ -726,13 +734,14 @@ def duplicate_checker(paragraph):
 
     aranaged_words = list(frequency_check.items())
 
-    result = sorted(aranaged_words, key=lambda x: (-x[1], x[0]))
+    sorted_words = sorted(aranaged_words, key=lambda x: (-x[1], x[0]))
+    words_appeard_more_than_once = list(filter(lambda word: word[1] > 1, sorted_words))
 
-    return result
+    return sorted_words, words_appeard_more_than_once
 
 
-# print(duplicate_checker(paragraph=paragraph))
-
+result = duplicate_checker(paragraph=paragraph)
+print((result[0], result[1]))
 
 
 transactions = [
@@ -767,7 +776,11 @@ def calc_transactions(transactions):
     return result
 
 
-# print(calc_transactions(transactions=transactions))
+print(calc_transactions(transactions=transactions))
+
+
+
+#================================================================================== LEVEL 6 Challenge Problems==================================================
 
 
 def anagrams_group(lists):
@@ -794,7 +807,7 @@ def anagrams_group(lists):
 
 lists = ["eat", "tea", "tan", "ate", "nat", "bat"]
 
-# print(anagrams_group(lists))
+print(anagrams_group(lists))
 
 
 lists_digit = [[1, 2], [3, 4], [5], [6, 7, 8]]
@@ -819,19 +832,18 @@ lists_digit = [[1, 2], [3, 4], [5], [6, 7, 8]]
 
 
 
-# from functools import reduce
+from functools import reduce
 
-# lists_digit = [[1, 2], [3, 4], [5], [6, 7, 8]]
+lists_digit = [[1, 2], [3, 4], [5], [6, 7, 8]]
 
 result = reduce(
     lambda total, current: total + current,
     lists_digit,
-    0
+    []
 )
 
 print(result)
 
-# print([1, 2] + [3, 4])
 
 
 students = [
@@ -860,3 +872,109 @@ students = [
         "scores": [42, 38, 50, 45, 40]
     }
 ]
+
+
+
+def calc_student_result():
+    results = []
+
+    for student in students:
+        student_score_count = len(student["scores"])
+
+        total = reduce(
+            lambda total, score: total + score,
+            student["scores"],
+            0
+        )
+
+        average = total / student_score_count
+
+        if average >= 90:
+            grade = "A"
+        elif average >= 80:
+            grade = "B"
+        elif average >= 70:
+            grade = "C"
+        elif average >= 60:
+            grade = "D"
+        else:
+            grade = "F"
+
+        results.append({
+            "name": student["name"],
+            "score": total,
+            "average": average,
+            "grade": grade
+        })
+
+    return results
+
+
+# print(calc_student_result())
+
+student_totals = [
+    reduce(lambda total, score: total + score, student["scores"], 0)
+    for student in students
+]
+
+# print(student_totals)
+
+characters = ""
+characters = "aaabbccccdaa"
+
+characters = "aaabbccccdaa"
+
+def calc_length_encoding_letters():
+    result = ""
+    current_char = characters[0]
+    count = 0
+
+    for char in characters:
+        if char == current_char:
+            count += 1
+        else:
+            result += current_char + str(count)
+
+            current_char = char
+            count = 1
+
+    result += current_char + str(count)
+
+    return result
+
+print(calc_length_encoding_letters())
+
+
+
+users = [
+    {"name": "  ADA ", "age": 22, "active": True},
+    {"name": "john", "age": 17, "active": True},
+    {"name": " GRACE", "age": 31, "active": False},
+    {"name": "david ", "age": 25, "active": True},
+    {"name": "MARY", "age": 19, "active": True},
+]
+def user_data_pipeline():
+
+    mapped_user  = [  (user['name'].replace(" ", ""), user["age"]) for user in users if user['age'] >= 18  ]
+
+    sorted_user = []
+    users_left = mapped_user.copy()
+
+    while users_left:
+        youngest = users_left[0]
+
+        for user in users_left:
+            if user[1] < youngest[1]:
+                youngest = user
+
+        sorted_user.append(youngest)
+        users_left.remove(youngest)
+
+
+
+    filter_user = list(filter(lambda user: (user['age'] >= 18 ), users))
+    mapped_user = list(map(lambda user: (user['name'].replace(' ', ''), user['age']), filter_user))
+    sorted_user =  sorted(mapped_user, key=lambda user: user[1])
+    return sorted_user
+
+print(user_data_pipeline())

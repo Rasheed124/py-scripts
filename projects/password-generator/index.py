@@ -1,3 +1,81 @@
+# import string
+# import random
+
+# string.ascii_lowercase
+# string.ascii_uppercase
+
+
+# class PasswordError(Exception):
+#     """Base exception class for Password domain errors."""
+#     pass
+
+
+# class InvalidInputError(PasswordError):
+#     """Raised when input syntax or characters are invalid."""
+#     pass
+
+
+# class InvalidPasswordError(PasswordError):
+#     """Raised when runtime math evaluation fails."""
+#     pass
+
+
+
+# password_characters = (
+#     {str(i) for i in range(10)}
+#     | set(string.ascii_letters)
+#     | set("!@#$%^&*")
+# )
+
+
+
+# def generate_password():
+
+#     while True:
+#         try:
+#             user_input = input("Type the length of characters you want: ").strip().replace(" ", "")
+
+#             if not user_input:
+#                 continue
+
+#             if not user_input.isdigit():
+#                 print("Input contains only numbers")
+#                 continue
+
+#             if not user_input:
+#                 print("Input can only contain didgit numbers not string type")
+#                 continue
+
+#             length_digit = int(user_input)
+#             password_characters_string = ""
+#             for chars in password_characters:
+#                 password_characters_string += chars
+
+#             random_nums = "".join(random.choices(password_characters_string, k=length_digit ))
+
+#             print(random_nums)
+#         except PasswordError as err:
+#             print(f"Error: {err}")
+#         except (KeyboardInterrupt, EOFError):
+#             print("\nSession interrupted. Goodbye!")
+#             break
+
+
+
+# if __name__ == "__main__":  
+#     generate_password()
+
+
+
+
+
+
+
+
+##################################################   AFTER REVIEW ########################################################
+
+
+
 import secrets
 import string
 
@@ -17,7 +95,6 @@ class PasswordLengthError(PasswordError):
     pass
 
 
-# Defined character pools
 LOWERCASE = string.ascii_lowercase
 UPPERCASE = string.ascii_uppercase
 DIGITS = string.digits
@@ -34,7 +111,6 @@ def generate_secure_password(length: int) -> str:
     if length < 8:
         raise PasswordLengthError("Password length must be at least 8 characters for security.")
 
-    # 1. Guarantee at least one character from each essential category
     guaranteed = [
         secrets.choice(LOWERCASE),
         secrets.choice(UPPERCASE),
@@ -42,14 +118,11 @@ def generate_secure_password(length: int) -> str:
         secrets.choice(SYMBOLS),
     ]
 
-    # 2. Fill the remaining slots randomly from the combined pool
     remaining_length = length - len(guaranteed)
     remaining = [secrets.choice(ALL_CHARACTERS) for _ in range(remaining_length)]
 
-    # 3. Combine and shuffle using a cryptographically secure method
     password_list = guaranteed + remaining
     
-    # SystemRandom instance for secure shuffling
     secrets.SystemRandom().shuffle(password_list)
 
     return "".join(password_list)

@@ -1,0 +1,1 @@
+The computer workshop started after lunch. Everyone brought a notebook and a personal computer. The instructor explained how text files and directories work. Python programming is useful for working with files. Good organization makes large projects easier to manage.

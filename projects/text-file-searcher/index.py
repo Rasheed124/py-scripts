@@ -140,7 +140,7 @@ def search_text_files(query: str, target_dir: Path | None = None) -> list[dict]:
     """
 
     clean_query = query.strip()
-    
+
     if not clean_query:
         raise InvalidInputError("Search query cannot be empty.")
 
@@ -178,6 +178,7 @@ def search_text_files(query: str, target_dir: Path | None = None) -> list[dict]:
                 })
 
         return results
+
 
     except Exception as e:
         raise FileAccessError(f"Error during directory search: {e}")

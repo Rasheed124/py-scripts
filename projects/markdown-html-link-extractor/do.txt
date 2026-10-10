@@ -1,0 +1,5 @@
+Visit [Python](https://www.python.org) to learn Python.
+
+<a href="https://github.com">GitHub</a>
+
+More information: [Python](https://www.python.org)

@@ -28,22 +28,75 @@ def search_file_markdown(query: str, target_dir: Path | None = None) -> list[dic
     if not clean_query:
         raise InvalidInputError("Search query cannot be empty.")
 
+    extracted_file_name = Path(clean_query).stem
 
     search_path = target_dir if target_dir else Path(__file__).parent
 
     if not search_path.exists() or not search_path.is_dir():
         raise FileAccessError(f"Search directory '{search_path}' does not exist.")
+
+    allowed_extensions = (".md", ".html", ".htm", ".txt")
+
+    text_files = [
+        file
+        for extension in allowed_extensions
+        for file in search_path.glob(f"*{extension}")
+    ]
+
+    original_file_path = ""
+    for file in text_files:
+        if file.stem == extracted_file_name:
+            original_file_path = file
+
+    if not original_file_path:
+        raise FileAccessError("No supported files found.")
+
+        
+    try:
+      
+        query_pattern = re.compile(re.escape("http"), re.IGNORECASE)
+        file_matches = []
+        result = {}
+
+        with open(original_file_path, "r", encoding="utf-8", errors="ignore") as file_handle:
+            for line_num, line in enumerate(file_handle, start=1):
+
+                matches = list(query_pattern.finditer(line))
+                if matches:
+                    file_matches.append({
+                        "line_number": line_num,
+                        "match_count": len(matches),
+                        "line_snippet": line.strip()
+                    })
+
+                if file_matches:
+                    extracted_snippet = [ matches['line_snippet'] for matches in file_matches ]
+                    link_groups = []
+                    for link_text in extracted_snippet:
+                        match_link = re.search(r'https?://[^\s)"\'<>]+', link_text)
+                        if match_link:
+                            link =  match_link.group()
+                            link_groups.append(link)
+                    for text_link in link_groups:
+                        if text_link in result:
+                            result[text_link] += 1
+                        else:
+                            result[text_link] = 1
+
+
+        return result
+
+    except Exception as e:
+        raise FileAccessError(f"Error during directory search: {e}")
+
     
+def search_texts_markdown(query: str, target_dir: Path | None = None) -> list[dict]:
+    """
+    Searches all .txt files in target_dir for a given word or phrase.
+    Supports case-insensitive exact phrase matching and line-level reporting.
+    """
 
-    file_name_extracted = Path(clean_query).stem
-    print(file_name_extracted)
-
-
-
-
-    # results = []
-    # Regex pattern matching exact word/phrase with word boundaries where applicable
-    # query_pattern = re.compile(re.escape(clean_query), re.IGNORECASE)
+    pass
 
     try:
       print("")

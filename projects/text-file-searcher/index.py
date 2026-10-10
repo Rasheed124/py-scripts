@@ -39,11 +39,11 @@
 #                     file_content_chars = [ w.lower().strip(string.punctuation)  for w in content.split() ]
 #                     conttent_search = [ w.lower() for w in word_search_chars if w in file_content_chars]
 
-#                     for word in conttent_search:
-#                          if word in word_search_result:
-#                              word_search_result[word] += 1
-#                          else:
-#                              word_search_result[word] = 1
+                    # for word in conttent_search:
+                    #      if word in word_search_result:
+                    #          word_search_result[word] += 1
+                    #      else:
+                    #          word_search_result[word] = 1
 
 #         return word_search_result
 

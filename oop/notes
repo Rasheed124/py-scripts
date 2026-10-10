@@ -1,0 +1,22 @@
+class Attributes
+
+instance Attributes
+
+instance Method
+
+Instance methods are functions that you define inside a class and can only call on an instance of that class. Just like .__init__(), an instance method always takes self as its first parameter.
+
+
+
+When and how to use both - #####
+
+Use class attributes to define properties that should have the same value for every class instance. Use instance attributes for properties that vary from one instance to another.
+
+
+
+
+
+
+Encapsulation in Python?
+
+Access modifiers are keywords in object-oriented programming that control which parts of your code can access certain class members, i.e., attributes (or variables) and methods.

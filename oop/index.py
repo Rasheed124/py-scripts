@@ -117,7 +117,7 @@ car =  Car()
 
 
 
-######################## Super method
+######################## Super With Inheritance method
 
 
 
@@ -160,3 +160,8 @@ circle =  Circle(color="Blue", is_filled=True, radius=20)
 rectangle =  Rectangle(color="White", is_filled=False, side=20)
 
 rectangle.describe()
+
+
+
+
+######################## Polymorphism 

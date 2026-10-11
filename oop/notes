@@ -1,6 +1,20 @@
+<!-- CORE CONCEPTS TO KNOW -->
+
+
+
+Encapsulation allows you to bundle data (attributes) and behaviors (methods) within a class to create a cohesive unit. By defining methods to control access to attributes and its modification, encapsulation helps maintain data integrity and promotes modular, secure code.
+
+Inheritance enables the creation of hierarchical relationships between classes, allowing a subclass to inherit attributes and methods from a parent class. This promotes code reuse and reduces duplication.
+
+Abstraction focuses on hiding implementation details and exposing only the essential functionality of an object. By enforcing a consistent interface, abstraction simplifies interactions with objects, allowing developers to focus on what an object does rather than how it achieves its functionality.
+
+Polymorphism allows you to treat objects of different types as instances of the same base type, as long as they implement a common interface or behavior. Python’s duck typing make it especially suited for polymorphism, as it allows you to access attributes and methods on objects without needing to worry about their actual class.
+
+
+
 class Attributes
 
-instance Attributes
+Instance Attributes
 
 instance Method
 
@@ -20,9 +34,35 @@ Encapsulation in Python?
 
 Access modifiers are keywords in object-oriented programming that control which parts of your code can access certain class members, i.e., attributes (or variables) and methods.
 
+- Public members: You can access public members from anywhere in your class.
+
+- Protected members: You can access protected members within the class hierarchy. This means you can access them within the same class and its - subclasses (child classes). But it's not advisable to use them in external classes (even though Python doesn't strictly enforce this rule).
+
+- Private members: You can access them only within the class itself.
+
+@property, @getters and @setters related to Encapsulation 
+
+
+# MultiLevel Inheritance
+# Inheritance
+#  Super With Inheritance method
+# Abstract Classes
+# Polymorphism -  Inheritance way and  Duck typing way
+# Aggregation
+# Composition
+# Nested Classess
+# static methods
+# class methods
+# Dunder Methods
+# Property and setter Methods -  getters, setters and deleters
+
 
 
 Polymorhpism
 
 Inheritance - An object could be treated of the same type as the parent
 Duck tyoing - ibject must have necessary attributes/methods
+
+
+Poly - Many
+Morphe- form

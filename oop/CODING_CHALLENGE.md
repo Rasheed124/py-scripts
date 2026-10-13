@@ -33,13 +33,7 @@ Create a `BankAccount` class with an account holder, account number, and balance
 
 Build a `Product` class with a name, price, and stock quantity.
 
-<!-- product_list[product_id] = {
-    "name": "Laptop",
-    "price": 500000,
-    "quantity": 10
-}
 
-print(product_list) -->
 
 **Requirements**
 

@@ -135,7 +135,6 @@ import string
 
 class LibraryBook:
 
-    # Shared class attributes
     library_name = "Central Library"
     __number_registered_books = 0
     __library_book_list = {}

@@ -66,3 +66,7 @@ Duck tyoing - ibject must have necessary attributes/methods
 
 Poly - Many
 Morphe- form
+
+
+
+You can also model virtual objects, such as a web server, directory tree, chatbot, file manager, and more.

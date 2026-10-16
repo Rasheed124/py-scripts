@@ -87,9 +87,7 @@ def run_email_extractor() -> None:
             else:
                 raise InvalidInputError("Please respond with 'yes' (y) or 'no' (n).")
 
-            # print(f"\n--- Results ---")
             print(f"Total Emails Count is: {total_count}")
-            # print(f"Emails: {email}")
             for key, email in enumerate(email_list, start=1):
                 print(f"  '{key}': {email}")
 
@@ -116,6 +114,7 @@ if __name__ == "__main__":
 
 
 
+# ============================================= AFTER AI REVIEW
 
 
 

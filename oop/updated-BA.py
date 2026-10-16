@@ -32,7 +32,6 @@ class BankAccount:
         self.__account_number = account_number.strip()
         self.__account_balance = account_balance
 
-    # Read-only properties
 
     @property
     def account_holder(self) -> str:
@@ -46,7 +45,6 @@ class BankAccount:
     def account_balance(self) -> int | float:
         return self.__account_balance
 
-    # Transaction methods
 
     def deposit(self, account_number: str, amount: int | float) -> str:
         if str(account_number) != self.__account_number:
@@ -85,7 +83,6 @@ class BankAccount:
 
         return f"Successfully withdrawn {amount} naira."
 
-    # Display methods
 
     def check_balance(self) -> str:
         return f"Your balance is {self.__account_balance} naira."
@@ -101,9 +98,6 @@ class BankAccount:
         return f"This is {self.account_holder}'s account."
 
 
-# ==========================================
-# 1. Create independent accounts
-# ==========================================
 
 account1 = BankAccount("Rasheed", "2002100", 4000)
 account2 = BankAccount("Adeola", "2002101", 2500)

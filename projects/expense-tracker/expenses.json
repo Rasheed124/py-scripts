@@ -1,0 +1,14 @@
+{
+    "CQEUMZFK": {
+        "expense_name": "Workers",
+        "expense_amount": "5000",
+        "expense_category": "food",
+        "expense_date": "2005-05-30"
+    },
+    "6Q1ILAOL": {
+        "expense_name": "Tech design Space",
+        "expense_amount": "3000",
+        "expense_category": "transportation",
+        "expense_date": "2020-06-20"
+    }
+}

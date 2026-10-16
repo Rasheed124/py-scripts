@@ -145,18 +145,16 @@ class Temperature:
         )
 
 
-# ==========================================
-# 1. Create temperature objects
-# ==========================================
+
 
 temp1 = Temperature(25)
 temp2 = Temperature(-10)
 temp3 = Temperature(0)
 
 print("--- Initial Temperatures ---")
-print(temp1)  # 25°C = 77°F
-print(temp2)  # -10°C = 14°F
-print(temp3)  # 0°C = 32°F
+print(temp1) 
+print(temp2)  
+print(temp3)  
 
 
 # ==========================================

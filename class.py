@@ -27,6 +27,13 @@
 
 # print(obj.num_instances)
 
-num=10
-res = num.__add__(5) 
-print(res)
+# num=10
+# res = num.__add__(5) 
+# print(res)
+
+
+
+name = "expense name".split()
+name = "_".join(name)
+
+print(name)

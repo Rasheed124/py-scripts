@@ -1,0 +1,41 @@
+customer_id,customer_name,email,city,age,gender,order_date,product,quantity,unit_price,status
+020,Nneka Udo,nneka@example.com,Uyo,45,Female,2024-06-16,Headphones,1,45.00,Returned
+017,Amina Yusuf,amina@example.com,Lagos,25,Female,2024-01-15,Laptop Stand,2,18.50,Paid
+016,Peter Obi,peter@example.com,Enugu,52,Male,2024-06-10,Monitor,1,180,Paid
+027,Ibrahim Lawal,ibrahim@example.com,Ilorin,44,Male,2024-07-02,Laptop Stand,1,18.50,Paid
+005,Emeka Nwosu,emeka@example.com,Enugu,41,Male,2024-04-11,Monitor,1,180,Shipped
+013,Kemi Ojo,kemi@example.com,Ibadan,33,Female,2024-06-01,Headphones,1,45,Paid
+038,Victor Ekanem,victor@example.com,Calabar,37,,2024-08-01,Monitor,1,180.00,Pending
+028,Nora Peter,nora@example.com,Benin City,32,Female,2024-07-05,Headphones,1,45.00,Paid
+040,Michael  Osei,michael@example.com,Accra,42,Male,2024-08-07,Laptop Stand,1,18.50,Shipped
+007,Fatima Sani,fatima@example.com,Kaduna,,Female,,Headphones,1,45.00,Pending
+026,Mariam Bello,mariam@example.com,Kano,27,Female,,USB-C Cable,2,5.50,Pending
+010,Musa Ibrahim,musa@example.com,Kano,38,Male,2024-05-10,Monitor,1,180.00,Cancelled
+014,David James,david@example.com,ABUJA,36,Male,2024-06-04,Laptop Stand,1,18.50,Shipped
+032,Daniel Kalu,daniel@example.com,Owerri,35,Male,2024-07-15,Monitor,1,180.00,Pending
+035,Bisi Afolayan,bisi@example.com,Ibadan,33,Female,2024-07-22,Headphones,1,45.00,PENDING
+009,Grace Mensah,,Accra,30,Female,2024-05-09,USB-C Cable,4,5.50,paid
+018,Ifeoma Nnaji,ifeoma@example.com,Enugu,28,Female,2024-06-12,Keyboard,1,35.00,pending
+025,Chidi Okafor,chidi.okafor@example.com,Abuja,34,Male,2024-02-15,Wireless Mouse,1,12.99,PAID
+001,Amina Yusuf,amina@example.com,Lagos,25,Female,2024-01-15,Laptop Stand,2,18.50,Paid
+034,Tunde Bakare,tunde@example.com,Abeokuta,40,Male,2024-07-20,USB-C Cable,2,5.50,Paid
+006,Tomi Akin,tomi@example.com,lagos,27,Female,2024-04-11,laptop stand,,18.50,Paid
+012,Samuel Mensah,samuel.mensah.example.com,Accra,,Male,2024-05-15,Mouse Pad,2,7.25,Pending
+002,Chidi Okafor,CHIDI.OKAFOR@EXAMPLE.COM,Abuja,34,Male,2024-02-15,Wireless Mouse,1,12.99,paid
+030,Aisha Sule,aisha@example.com,Lagos,28,Female,2024-07-10,Keyboard,1,-35,Paid
+022,Maryam Ali,maryam@example.com,Sokoto,22,Female,2024-06-20,Webcam,1,39.99,Pending
+003,Bola Adeyemi,bola@example.com,Ibadan,,Female,2024-03-02,USB-C Cable,,5.5,Pending
+031,Favour Okon,favour@example.com,Uyo,21,Female,2024-07-12,Mouse Pad,2,7.25,Paid
+037,Sarah James,sarah@example.com,Abuja,28,Female,2024-07-28,Keyboard,,35.00,Paid
+004,Zainab Bello,zainab@@example.com,Kano,29,Female,,Keyboard,1,35.00,PAID
+036,Omar Hassan,omar@example.com,Kano,31,Male,2024-07-25,Webcam,1,39.99,paid??
+024,Seyi Adeola,seyi@example.com,Ibadan,29,Female,2024-06-25,Monitor,1,180.00,Paid
+033,Esther Dan,esther@example.com,Lagos,29,Female,,Laptop Stand,1,18.50,Shipped
+011,Adaeze Obi,adaeze@example.com,Lagos,26,Female,2024-05-12,Keyboard,1,35,Paid
+023,John Doe,john.doe@example.com,Lagos,37,Male,2024-06-22,Keyboard,1,35.00,Paid
+019,Ola Balogun,ola@example.com,Lagos,0,Male,2024-06-14,USB-C Cable,,5.50,Paid
+021,Yusuf Garba,yusuf@example.com,Katsina,39,Male,2024-06-18,Mouse Pad,2,7.25,Paid
+008,Ifeanyi Eze,ifeanyi@example.com,Port Harcourt,-5,Male,2024-05-01,Webcam,1,39.99,Paid
+015,Ruth Danjuma,ruth@example.com,Jos,24,Female,2024-06-07,Web cam,1,39.99,Pending
+029,Kelvin James,kelvin@example.com,Calabar,26,Male,2024-07-08,Webcam,1,,Pending
+039,Lola Adebayo,lola@example.com,,30,Female,2024-08-04,Mouse Pad,2,7.25,Paid

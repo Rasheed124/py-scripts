@@ -322,7 +322,7 @@ def process_expense_action(expenses: dict, action: str) -> dict:
         expense_id = generate_expense_id(expenses)
         expenses[expense_id] = {
             "expense_name": expense_name,
-            "expense_amount": expense_amount,
+            "expense_amount": float(expense_amount),
             "expense_category": expense_category,
             "expense_date": expense_date,
         }
@@ -338,7 +338,7 @@ def process_expense_action(expenses: dict, action: str) -> dict:
             for expense_id, data in expenses.items():
                 print(f"\nID: {expense_id}")
                 print(f"  Name:     {data['expense_name']}")
-                print(f"  Amount:   ₦{data['expense_amount']:,.2f}")
+                print(f"  Amount:   ₦{float(data['expense_amount']):,.2f}")
                 print(f"  Category: {data['expense_category']}")
                 print(f"  Date:     {data['expense_date']}")
 

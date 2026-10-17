@@ -33,7 +33,21 @@
 
 
 
-name = "expense name".split()
-name = "_".join(name)
+# name = "expense name".split()
+# name = "_".join(name)
 
-print(name)
+# print(name)
+
+from pathlib import Path
+
+DATA_DIR = Path(__file__).parent
+filename = input("Enter filename: ")
+
+DATA_FILE = DATA_DIR / filename
+
+if DATA_FILE.is_file():
+    with open(DATA_FILE, "r", encoding="utf-8") as f:
+        # Process file
+        pass
+else:
+    print("File not found in the working folder.")

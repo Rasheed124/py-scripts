@@ -112,7 +112,6 @@ def process_todo_action(todo_lists: dict, action: str) -> dict:
         if new_content:
             task_data["task_content"] = new_content
 
-        # FIXED: Pass the full todo_lists dictionary instead of just task_data
         save_todo_lists(todo_lists)
         print("Task updated successfully!")
 

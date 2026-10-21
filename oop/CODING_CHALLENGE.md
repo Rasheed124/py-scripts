@@ -252,7 +252,7 @@ _Problems 19–24 · Work with different objects through consistent interfaces._
 
 Create `Circle`, `Rectangle`, and `Triangle` classes.
 
-**Requirements**
+**Requirements**    
 
 - Give each class a common area-calculation method.
 - Implement the calculation according to each shape's geometry.

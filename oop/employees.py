@@ -159,9 +159,9 @@
 from uuid import uuid4
 from decimal import Decimal, InvalidOperation
 from math import isfinite
+from abc import ABC, abstractmethod
 
-
-class Employee:
+class Employee(ABC):
     employees_record = {}
 
     def __init__(self, name: str, position: str):
@@ -194,10 +194,13 @@ class Employee:
         return self.__position
 
     @property
-    def salary(self) -> Decimal:
-        raise NotImplementedError(
-            "Subclasses must define their salary calculation."
-        )
+    @abstractmethod
+    def salary(self):
+        """Each employee type must define its salary."""
+        pass
+
+    def calculate_salary(self):
+        return self.salary
 
     def calculate_salary(self) -> Decimal:
         return self.salary

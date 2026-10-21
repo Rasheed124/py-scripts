@@ -1,0 +1,71 @@
+.newsletter-form {
+  margin-bottom: 0 !important;
+}
+.newsletter-form form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.newsletter-form form .evf-field-container {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+.newsletter-form form .evf-field-container .evf-frontend-row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.newsletter-form
+  form
+  .evf-field-container
+  .evf-frontend-row
+  .evf-frontend-grid {
+  padding-left: 0;
+  padding-right: 0;
+}
+.newsletter-form
+  form
+  .evf-field-container
+  .evf-frontend-row
+  .evf-frontend-grid
+  .evf-field {
+  margin-bottom: 0;
+}
+.newsletter-form
+  form
+  .evf-field-container
+  .evf-frontend-row
+  .evf-frontend-grid
+  .evf-field
+  input {
+  height: 48px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 16px;
+  margin-bottom: 0;
+  border-radius: 4px 0 0 4px;
+}
+.newsletter-form form .evf-submit-container {
+  padding-left: 0;
+  padding-right: 0;
+}
+.newsletter-form form .evf-submit-container .newsletter-submit {
+  background-color: var(--wp--preset--color--cm-color-1);
+  border-color: var(--wp--preset--color--cm-color-1);
+  color: #fff;
+  border-radius: 0 4px 4px 0;
+  height: 48px;
+  margin-left: -10px;
+}
+.newsletter-form form .evf-submit-container .newsletter-submit:hover {
+  background-color: var(--wp--preset--color--cm-color-2);
+  border-color: var(--wp--preset--color--cm-color-2);
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .newsletter-form form .evf-field-container {
+    width: 100%;
+    margin-left: 30px;
+  }
+}

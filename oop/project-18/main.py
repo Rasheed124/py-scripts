@@ -46,18 +46,15 @@ class Ostrich(Bird):
         return f"{self.name} can walk."
 
 
-# Create bird objects
 eagle = Eagle("Eagle", "Brown", 5)
 penguin = Penguin("Penguin", "Black and white", 15)
 ostrich = Ostrich("Ostrich", "Brown", 100)
 
-# Display shared information
 print("=== Bird Information ===")
 print(eagle.describe())
 print(penguin.describe())
 print(ostrich.describe())
 
-# Demonstrate individual capabilities
 print("\n=== Bird Behaviors ===")
 print(eagle.fly())
 print(penguin.swim())

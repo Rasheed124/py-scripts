@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<report>
+    <record>
+        <name>John</name>
+        <department>Engineering</department>
+        <salary>300000</salary>
+    </record>
+    <record>
+        <name>Mary</name>
+        <department>Marketing</department>
+        <salary>250000</salary>
+    </record>
+    <record>
+        <name>David</name>
+        <department>Design</department>
+        <salary>280000</salary>
+    </record>
+</report>

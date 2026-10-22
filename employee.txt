@@ -1,0 +1,18 @@
+EMPLOYEE REPORT
+========================================
+
+Record 1
+Name: John
+Department: Engineering
+Salary: 300000
+
+Record 2
+Name: Mary
+Department: Marketing
+Salary: 250000
+
+Record 3
+Name: David
+Department: Design
+Salary: 280000
+

@@ -1,0 +1,48 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title %}| Task Manager{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'tasks/css/style.css' %}" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <a href="{% url 'tasks:list' %}" class="brand"> TaskFlow </a>
+
+        <nav class="sidebar-nav">
+          <a href="{% url 'tasks:list' %}"> All Tasks </a>
+
+          <a href="{% url 'tasks:create' %}"> Create Task </a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">PERSONAL WORKSPACE</p>
+            <h1>{% block page_heading %}My Tasks{% endblock %}</h1>
+          </div>
+
+          <a href="{% url 'tasks:create' %}" class="btn btn-primary">
+            + Add Task
+          </a>
+        </header>
+
+        <section class="page-content">
+          {% block content %}{% endblock %}
+        </section>
+        <footer class="app-footer">
+          <p>
+            TaskFlow &copy; {% now "Y" %}. Stay focused and get things done.
+          </p>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

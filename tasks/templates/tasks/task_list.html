@@ -1,0 +1,143 @@
+
+{% extends "tasks/base.html" %}
+
+{% block title %}All Tasks | TaskFlow{% endblock %}
+{% block page_heading %}My Tasks{% endblock %}
+
+{% block content %}
+
+<div class="welcome-section">
+    <div>
+        <h2>Stay organized.</h2>
+        <p>Keep track of what needs to get done.</p>
+    </div>
+
+    <a href="{% url 'tasks:create' %}" class="btn btn-primary">
+        + Create New Task
+    </a>
+</div>
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <span class="stat-label">Total Tasks</span>
+        <strong class="stat-value">{{ total_tasks }}</strong>
+        <span class="stat-description">All your tasks</span>
+    </div>
+
+    <div class="stat-card">
+        <span class="stat-label">Pending</span>
+        <strong class="stat-value">{{ pending_tasks }}</strong>
+        <span class="stat-description">Still to be completed</span>
+    </div>
+
+    <div class="stat-card">
+        <span class="stat-label">Completed</span>
+        <strong class="stat-value">{{ completed_tasks }}</strong>
+        <span class="stat-description">Successfully finished</span>
+    </div>
+
+</div>
+
+<div class="section-heading">
+    <div>
+        <h2>All Tasks</h2>
+        <p>Your current task list</p>
+    </div>
+
+    <span class="task-count">{{ total_tasks }} tasks</span>
+</div>
+
+<div class="task-list">
+
+    {% for task in tasks %}
+
+        <article class="task-card">
+
+            <div class="task-card-main">
+
+                <form
+                    method="POST"
+                    action="{% url 'tasks:toggle_complete' task.id %}"
+                    class="completion-form"
+                >
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="completion-button {% if task.completed %}is-completed{% endif %}"
+                        aria-label="{% if task.completed %}Mark as pending{% else %}Mark as completed{% endif %}"
+                    >
+                        {% if task.completed %}✓{% endif %}
+                    </button>
+                </form>
+
+                <div class="task-information">
+                    <a href="{% url 'tasks:detail' task.id %}"
+                       class="task-title {% if task.completed %}completed-title{% endif %}">
+                        {{ task.title }}
+                    </a>
+
+                    {% if task.description %}
+                        <p class="task-description">
+                            {{ task.description|truncatechars:100 }}
+                        </p>
+                    {% else %}
+                        <p class="task-description muted">
+                            No description provided.
+                        </p>
+                    {% endif %}
+
+                    <div class="task-metadata">
+
+                        <span class="priority priority-{{ task.priority }}">
+                            {{ task.get_priority_display }}
+                        </span>
+
+                        {% if task.due_date %}
+                            <span class="due-date">
+                                <span aria-hidden="true">◷</span>
+                                {{ task.due_date|date:"M d, Y" }}
+                            </span>
+                        {% else %}
+                            <span class="due-date muted">
+                                No deadline
+                            </span>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="task-card-actions">
+                <a href="{% url 'tasks:update' task.id %}"
+                   class="action-link">
+                    Edit
+                </a>
+
+                <a href="{% url 'tasks:delete' task.id %}"
+                   class="action-link action-delete">
+                    Delete
+                </a>
+            </div>
+
+        </article>
+
+    {% empty %}
+
+        <div class="empty-state">
+            <div class="empty-state-icon">✓</div>
+            <h3>No tasks yet</h3>
+            <p>Create your first task and start organizing your day.</p>
+
+            <a href="{% url 'tasks:create' %}" class="btn btn-primary">
+                Create Your First Task
+            </a>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

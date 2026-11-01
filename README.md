@@ -25,9 +25,6 @@ The project follows a modular Django structure, separating project configuration
 
 ![Project Application Structure](docs/images/project-core-feature-2.png)
 
-![Project Application Installation Starter 1 ](docs/images/project-installation-starter-1.png)
-
-![Project Application Installation  Starter 2](docs/images/project-installation-starter-2.png)
 
 ## Development Stages
 
@@ -78,3 +75,7 @@ Important concepts, architectural decisions, implementation notes, and lessons l
 ## Setup Instructions
 
 Instructions for installing dependencies, configuring the environment, and running the project.
+
+![Project Application Installation Starter 1 ](docs/images/project-installation-1.png)
+
+![Project Application Installation  Starter 2](docs/images/project-installation-starter-2.png)

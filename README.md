@@ -67,6 +67,14 @@ The project follows a modular Django structure, separating project configuration
 
 Important concepts, architectural decisions, implementation notes, and lessons learned.
 
+### Environment Configuration
+
+- Environment variables managed with `django-environ`.
+- Local secrets stored in `.env`.
+- `.env.example` documents required variables.
+- Sensitive files excluded through `.gitignore`.
+- Production configuration will use hosting-provider environment variables.
+
 ## Setup Instructions
 
 Instructions for installing dependencies, configuring the environment, and running the project.

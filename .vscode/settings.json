@@ -1,0 +1,38 @@
+
+{
+    // Disable formatting globally.
+    // Each language will have its own formatter configuration.
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+
+    // Python: use Black
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": false,
+        "editor.formatOnSaveMode": "file"
+    },
+
+    // Django templates: avoid unsafe automatic formatting
+    "[django-html]": {
+        "editor.formatOnSave": false,
+        "editor.formatOnPaste": false
+    },
+
+    // Ordinary HTML
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features",
+        "editor.formatOnSave": false
+    },
+
+    // CSS: use VS Code's built-in formatter
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features",
+        "editor.formatOnSave": true
+    },
+
+    // Keep formatting predictable
+    "editor.formatOnType": false,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true
+}

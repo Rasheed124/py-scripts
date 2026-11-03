@@ -33,9 +33,6 @@ class TaskModelTests(TestCase):
 
 
 
-
-
-
 class TaskCreateViewTests(TestCase):
 
     def test_create_task_page_returns_200(self):

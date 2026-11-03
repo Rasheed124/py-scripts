@@ -6,6 +6,78 @@
 
 {% block content %}
 
+
+<div class="task-toolbar">
+    <form method="GET" action="{% url 'tasks:list' %}" class="task-toolbar-form">
+
+        <!-- Search -->
+        <div class="search-field">
+            <span class="search-icon">⌕</span>
+
+            <input
+                type="search"
+                name="q"
+                value="{{ query }}"
+                placeholder="Search tasks by title or description..."
+                class="form-control"
+                aria-label="Search tasks"
+            >
+        </div>
+
+        <!-- Status Filter -->
+        <div class="filter-field">
+            <select name="status" class="form-control">
+                <option value="">All Statuses</option>
+
+                <option value="pending"
+                    {% if status == "pending" %}selected{% endif %}>
+                    Pending
+                </option>
+
+                <option value="completed"
+                    {% if status == "completed" %}selected{% endif %}>
+                    Completed
+                </option>
+            </select>
+        </div>
+
+        <!-- Priority Filter -->
+        <div class="filter-field">
+            <select name="priority" class="form-control">
+                <option value="">All Priorities</option>
+
+                <option value="low"
+                    {% if priority == "low" %}selected{% endif %}>
+                    Low Priority
+                </option>
+
+                <option value="medium"
+                    {% if priority == "medium" %}selected{% endif %}>
+                    Medium Priority
+                </option>
+
+                <option value="high"
+                    {% if priority == "high" %}selected{% endif %}>
+                    High Priority
+                </option>
+            </select>
+        </div>
+
+        <!-- Actions -->
+        <div class="toolbar-actions">
+            <button type="submit" class="btn btn-primary">
+                Apply
+            </button>
+
+            {% if query or status or priority %}
+                <a href="{% url 'tasks:list' %}" class="btn btn-secondary">
+                    Clear
+                </a>
+            {% endif %}
+        </div>
+
+    </form>
+</div>
 <div class="welcome-section">
     <div>
         <h2>Stay organized.</h2>
@@ -124,19 +196,51 @@
 
         </article>
 
+
     {% empty %}
 
         <div class="empty-state">
-            <div class="empty-state-icon">✓</div>
-            <h3>No tasks yet</h3>
-            <p>Create your first task and start organizing your day.</p>
 
-            <a href="{% url 'tasks:create' %}" class="btn btn-primary">
-                Create Your First Task
-            </a>
+            {% if query %}
+
+                <div class="empty-state-icon">⌕</div>
+
+                <h3>No matching tasks found</h3>
+
+                <p>
+                    We couldn't find any tasks matching
+                    <strong>"{{ query }}"</strong>.
+                </p>
+
+                <p class="empty-state-hint">
+                    Try another search term or check your spelling.
+                </p>
+
+                <a href="{% url 'tasks:list' %}" class="btn btn-secondary">
+                    Clear Search
+                </a>
+
+            {% else %}
+
+                <div class="empty-state-icon">✓</div>
+
+                <h3>No tasks yet</h3>
+
+                <p>
+                    You haven't created any tasks.
+                    Start organizing your work by adding your first task.
+                </p>
+
+                <a href="{% url 'tasks:create' %}" class="btn btn-primary">
+                    Create Your First Task
+                </a>
+
+            {% endif %}
+
         </div>
 
     {% endfor %}
+
 
 </div>
 

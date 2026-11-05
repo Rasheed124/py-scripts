@@ -1,48 +1,103 @@
+
 {% load static %}
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}| Task Manager{% endblock %}</title>
+    <title>{% block title %}TaskFlow{% endblock %}</title>
 
-    <link rel="stylesheet" href="{% static 'tasks/css/style.css' %}" />
-  </head>
-  <body>
+    <link
+        rel="stylesheet"
+        href="{% static 'tasks/css/style.css' %}"
+    >
+</head>
+
+<body>
     <div class="app-layout">
-      <aside class="sidebar">
-        <a href="{% url 'tasks:list' %}" class="brand"> TaskFlow </a>
 
-        <nav class="sidebar-nav">
-          <a href="{% url 'tasks:list' %}"> All Tasks </a>
+        <aside class="sidebar">
 
-          <a href="{% url 'tasks:create' %}"> Create Task </a>
-        </nav>
-      </aside>
+            <a href="{% url 'tasks:list' %}" class="brand">
+                TaskFlow
+            </a>
 
-      <main class="main-content">
-        <header class="topbar">
-          <div>
-            <p class="eyebrow">PERSONAL WORKSPACE</p>
-            <h1>{% block page_heading %}My Tasks{% endblock %}</h1>
-          </div>
+            <nav class="sidebar-nav">
+                <a href="{% url 'tasks:list' %}">
+                    All Tasks
+                </a>
 
-          <a href="{% url 'tasks:create' %}" class="btn btn-primary">
-            + Add Task
-          </a>
-        </header>
+                <a href="{% url 'tasks:create' %}">
+                    Create Task
+                </a>
+            </nav>
 
-        <section class="page-content">
-          {% block content %}{% endblock %}
-        </section>
-        <footer class="app-footer">
-          <p>
-            TaskFlow &copy; {% now "Y" %}. Stay focused and get things done.
-          </p>
-        </footer>
-      </main>
+            <div class="sidebar-account">
+
+                <div class="sidebar-user">
+                    <div class="user-avatar">
+                        {{ request.user.username|first|upper }}
+                    </div>
+
+                    <div class="user-info">
+                        <strong>{{ request.user.username }}</strong>
+                        <span>Personal workspace</span>
+                    </div>
+                </div>
+
+                <form
+                    method="POST"
+                    action="{% url 'accounts:logout' %}"
+                    class="logout-form"
+                >
+                    {% csrf_token %}
+
+                    <button type="submit" class="logout-button">
+                        <span class="logout-icon">↪</span>
+                        Sign out
+                    </button>
+                </form>
+
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <div>
+                    <p class="eyebrow">PERSONAL WORKSPACE</p>
+
+                    <h1>
+                        {% block page_heading %}My Tasks{% endblock %}
+                    </h1>
+                </div>
+
+                <a
+                    href="{% url 'tasks:create' %}"
+                    class="btn btn-primary"
+                >
+                    + Add Task
+                </a>
+
+            </header>
+
+            <section class="page-content">
+                {% block content %}{% endblock %}
+            </section>
+
+            <footer class="app-footer">
+                <p>
+                    TaskFlow &copy; {% now "Y" %}.
+                    Stay focused and get things done.
+                </p>
+            </footer>
+
+        </main>
+
     </div>
-  </body>
+</body>
 </html>

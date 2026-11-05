@@ -1,24 +1,29 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_POST, require_http_methods
-from django.db.models import Case, When, Value, IntegerField, Count
-from django.db.models import Q
 
-from .models import Task
-from .forms import TaskForm
-
-
-
-
-from django.shortcuts import render, redirect
-from django.db.models import Q, Case, When, Value, IntegerField
-from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import (
+    Case,
+    When,
+    Value,
+    IntegerField,
+    Count,
+    Q,
+)
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
+from django.views.decorators.http import require_POST, require_http_methods
 
+from .forms import TaskForm
 from .models import Task
 
 
+@login_required
 def task_list(request):
+    # Establish ownership scope first.
+    user_tasks = Task.objects.filter(user=request.user)
+    tasks = user_tasks
 
+    # Remove empty query parameters.
     params = request.GET.copy()
 
     for key in list(params.keys()):
@@ -31,46 +36,44 @@ def task_list(request):
 
         return redirect(request.path)
 
-
-
+    # Read query parameters.
     query = request.GET.get("q", "").strip()
     status = request.GET.get("status", "")
     priority = request.GET.get("priority", "")
     sort = request.GET.get("sort", "newest")
     schedule = request.GET.get("schedule", "")
+
     today = timezone.localdate()
 
-    tasks = Task.objects.all()
-
+    # Search.
     if query:
         tasks = tasks.filter(
-            Q(title__icontains=query) |
-            Q(description__icontains=query)
+            Q(title__icontains=query)
+            | Q(description__icontains=query)
         )
 
+    # Status filtering.
     if status == "completed":
         tasks = tasks.filter(completed=True)
-
     elif status == "pending":
         tasks = tasks.filter(completed=False)
 
-
-
+    # Priority filtering.
     if priority in Task.Priority.values:
         tasks = tasks.filter(priority=priority)
 
+    # Schedule filtering.
     if schedule == "today":
         tasks = tasks.filter(due_date=today)
-
     elif schedule == "upcoming":
         tasks = tasks.filter(due_date__gt=today)
-
     elif schedule == "overdue":
         tasks = tasks.filter(
             due_date__lt=today,
-            completed=False
+            completed=False,
         )
 
+    # Sorting.
     sort_options = {
         "newest": ("-created_at",),
         "oldest": ("created_at",),
@@ -85,25 +88,22 @@ def task_list(request):
         output_field=IntegerField(),
     )
 
-
     if sort == "priority_high":
         tasks = tasks.order_by(
             priority_order,
-            "-created_at"
+            "-created_at",
         )
-
     elif sort == "priority_low":
         tasks = tasks.order_by(
             priority_order.desc(),
-            "-created_at"
+            "-created_at",
         )
-
     else:
         tasks = tasks.order_by(
             *sort_options.get(sort, sort_options["newest"])
         )
 
-
+    # Pagination.
     paginator = Paginator(tasks, 3)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -112,37 +112,32 @@ def task_list(request):
     pagination_params.pop("page", None)
     page_base_url = pagination_params.urlencode()
 
-
-    
-    # Dashboard statistics
-    stats = Task.objects.aggregate(
+    # User-specific dashboard statistics.
+    stats = user_tasks.aggregate(
         total_count=Count("id"),
         completed_count=Count(
             "id",
-            filter=Q(completed=True)
+            filter=Q(completed=True),
         ),
         pending_count=Count(
             "id",
-            filter=Q(completed=False)
+            filter=Q(completed=False),
         ),
         overdue_count=Count(
             "id",
             filter=Q(
                 due_date__lt=today,
-                completed=False
-            )
+                completed=False,
+            ),
         ),
     )
 
-    # Calculate completion rate
     completion_rate = (
-        (stats["completed_count"] / stats["total_count"]) * 100
+        stats["completed_count"] / stats["total_count"] * 100
         if stats["total_count"] > 0
         else 0
     )
 
-
-    # 9. Dashboard statistics
     context = {
         "tasks": page_obj,
         "page_obj": page_obj,
@@ -158,18 +153,21 @@ def task_list(request):
         "pending_tasks": stats["pending_count"],
         "overdue_tasks": stats["overdue_count"],
         "completion_rate": round(completion_rate),
-            }
+    }
 
     return render(request, "tasks/task_list.html", context)
 
 
-
+@login_required
 def task_create(request):
     if request.method == "POST":
         form = TaskForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
+
             return redirect("tasks:list")
     else:
         form = TaskForm()
@@ -181,41 +179,57 @@ def task_create(request):
     )
 
 
+@login_required
+def task_detail(request, task_id):
+    task = get_object_or_404(
+        Task,
+        pk=task_id,
+        user=request.user,
+    )
+
+    return render(
+        request,
+        "tasks/task_detail.html",
+        {"task": task},
+    )
+
+
+@login_required
 def task_update(request, task_id):
-    task = get_object_or_404(Task, pk=task_id)
+    task = get_object_or_404(
+        Task,
+        pk=task_id,
+        user=request.user,
+    )
 
     if request.method == "POST":
         form = TaskForm(request.POST, instance=task)
 
         if form.is_valid():
             form.save()
-            return redirect("tasks:detail", task_id=task.pk)
+
+            return redirect(
+                "tasks:detail",
+                task_id=task.pk,
+            )
     else:
         form = TaskForm(instance=task)
 
     return render(
         request,
         "tasks/task_form.html",
-        {
-            "form": form,
-            "task": task,
-        },
+        {"form": form, "task": task},
     )
 
-def task_detail(request, task_id):
-    task = get_object_or_404(Task, pk=task_id)
 
-    context = {
-        "task": task,
-    }
-
-    return render(request, "tasks/task_detail.html", context)
-
-
-
+@login_required
 @require_http_methods(["GET", "POST"])
 def task_delete(request, task_id):
-    task = get_object_or_404(Task, pk=task_id)
+    task = get_object_or_404(
+        Task,
+        pk=task_id,
+        user=request.user,
+    )
 
     if request.method == "POST":
         task.delete()
@@ -228,14 +242,16 @@ def task_delete(request, task_id):
     )
 
 
+@login_required
 @require_POST
 def task_toggle_complete(request, task_id):
-    task = get_object_or_404(Task, pk=task_id)
+    task = get_object_or_404(
+        Task,
+        pk=task_id,
+        user=request.user,
+    )
 
     task.completed = not task.completed
     task.save(update_fields=["completed", "updated_at"])
 
     return redirect("tasks:list")
-
-
-

@@ -1,0 +1,72 @@
+
+{% extends "accounts/base_auth.html" %}
+
+{% block title %}Create Account | TaskFlow{% endblock %}
+
+{% block auth_content %}
+
+<div class="auth-header">
+    <span class="auth-eyebrow">GET STARTED WITH TASKFLOW</span>
+
+    <h1>Create your account</h1>
+
+    <p>
+        Organize your work, manage priorities and keep track of your progress.
+    </p>
+</div>
+
+<form method="POST" novalidate class="auth-form">
+
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        <div class="auth-alert auth-alert-error" role="alert">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    {% for field in form %}
+        <div class="auth-form-group">
+
+            <label for="{{ field.id_for_label }}">
+                {{ field.label }}
+
+                {% if field.field.required %}
+                    <span class="auth-required">*</span>
+                {% endif %}
+            </label>
+
+            {{ field }}
+
+            {% if field.help_text %}
+                <div class="auth-help-text">
+                    {{ field.help_text|safe }}
+                </div>
+            {% endif %}
+
+            {% for error in field.errors %}
+                <small class="auth-field-error">
+                    {{ error }}
+                </small>
+            {% endfor %}
+
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="auth-submit">
+        Create Account
+    </button>
+
+</form>
+
+<div class="auth-alternative">
+    <p>
+        Already have an account?
+
+        <a href="{% url 'accounts:login' %}">
+            Sign in
+        </a>
+    </p>
+</div>
+
+{% endblock %}

@@ -885,6 +885,102 @@ textarea.form-control {
   margin-top: 12px;
 }
 
+
+
+
+
+/* =========================================
+   SIDEBAR ACCOUNT
+========================================= */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-account {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 0 5px;
+    margin-bottom: 18px;
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #373b55;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.user-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.user-info strong {
+    overflow: hidden;
+    color: #ffffff;
+    font-size: 13px;
+    text-overflow: ellipsis;
+}
+
+.user-info span {
+    color: #a5a9ba;
+    font-size: 11px;
+}
+
+.logout-form {
+    width: 100%;
+}
+
+.logout-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: transparent;
+    color: #d1d5e2;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.logout-button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+
+.logout-icon {
+    font-size: 17px;
+}
+
+@media (max-width: 768px) {
+    .sidebar-account {
+        margin-top: 20px;
+    }
+}
+
+
+
 @media (max-width: 480px) {
   .pagination {
     flex-wrap: wrap;

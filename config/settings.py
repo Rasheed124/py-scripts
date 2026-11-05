@@ -12,8 +12,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env.read_env(BASE_DIR / ".env")
 
-
-
 SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = env("DEBUG")
@@ -31,8 +29,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "tasks.apps.TasksConfig",
+    "accounts.apps.AccountsConfig",
 ]
 
 MIDDLEWARE = [
@@ -44,6 +42,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "tasks:list"
+LOGOUT_REDIRECT_URL = "accounts:login"
 
 ROOT_URLCONF = 'config.urls'
 

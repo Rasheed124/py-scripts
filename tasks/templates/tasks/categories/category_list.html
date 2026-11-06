@@ -6,11 +6,9 @@
 {% block page_heading %}My Categories{% endblock %}
 
 {% block topbar_action %}
-    <a
-        href="{% url 'tasks:category_create' %}"
-        class="btn btn-primary"
-    >
-        + Add Category
+    <a href="{% url 'tasks:category_create' %}" class="btn btn-primary">
+        <span aria-hidden="true">+</span>
+        Add Category
     </a>
 {% endblock %}
 
@@ -18,96 +16,178 @@
 
 <section class="categories-page">
 
-    <div class="section-intro">
-        <h2>Organize your tasks</h2>
-        <p>
-            Create categories to group related tasks
-            and keep your workspace organized.
-        </p>
+    <div class="categories-intro">
+        <div class="categories-intro-content">
+            <span class="categories-eyebrow">WORKSPACE ORGANIZATION</span>
+
+            <h2>Organize your tasks</h2>
+
+            <p>
+                Group related tasks into categories to keep your
+                responsibilities structured and easy to manage.
+            </p>
+        </div>
     </div>
 
-    {% if categories %}
 
-        <div class="category-grid">
+    <!-- Overview statistics -->
+    <div class="category-stats">
 
-            {% for category in categories %}
+        <article class="category-stat-card">
+            <div class="category-stat-icon category-icon-purple">
+                <span aria-hidden="true">▦</span>
+            </div>
 
-                <article class="category-card">
+            <div class="category-stat-info">
+                <span>Total categories</span>
+                <strong>{{ total_categories }}</strong>
+                <small>Your personal groups</small>
+            </div>
+        </article>
 
-                    <div class="category-card-header">
-                        <div class="category-icon">
-                            {{ category.name|first|upper }}
+
+        <article class="category-stat-card">
+            <div class="category-stat-icon category-icon-green">
+                <span aria-hidden="true">✓</span>
+            </div>
+
+            <div class="category-stat-info">
+                <span>Categorized tasks</span>
+                <strong>{{ categorized_tasks }}</strong>
+                <small>Tasks assigned to categories</small>
+            </div>
+        </article>
+
+
+        <article class="category-stat-card">
+            <div class="category-stat-icon category-icon-orange">
+                <span aria-hidden="true">○</span>
+            </div>
+
+            <div class="category-stat-info">
+                <span>Uncategorized tasks</span>
+                <strong>{{ uncategorized_tasks }}</strong>
+                <small>Tasks awaiting organization</small>
+            </div>
+        </article>
+
+    </div>
+
+
+    <!-- Category collection -->
+    <div class="categories-section">
+
+        <div class="categories-section-header">
+            <div>
+                <h3>Your categories</h3>
+                <p>Manage the groups in your workspace.</p>
+            </div>
+
+            <span class="categories-total">
+                {{ total_categories }}
+                categor{{ total_categories|pluralize:"y,ies" }}
+            </span>
+        </div>
+
+
+        {% if categories %}
+
+            <div class="category-grid">
+
+                {% for category in categories %}
+
+                    <article class="category-card">
+
+                        <div class="category-card-top">
+
+                            <div class="category-card-identity">
+
+                                <div class="category-avatar">
+                                    {{ category.name|first|upper }}
+                                </div>
+
+                                <div class="category-title-group">
+                                    <h4>{{ category.name }}</h4>
+                                    <span>
+                                        Created {{ category.created_at|date:"M d, Y" }}
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <span class="category-task-count">
+                                {{ category.task_count }}
+                                task{{ category.task_count|pluralize }}
+                            </span>
+
                         </div>
 
-                        <div class="category-actions">
+
+                        <div class="category-card-description">
+                            {% if category.description %}
+                                {{ category.description|truncatechars:110 }}
+                            {% else %}
+                                <span class="category-no-description">
+                                    No description added yet.
+                                </span>
+                            {% endif %}
+                        </div>
+
+
+                        <div class="category-card-footer">
 
                             <a
                                 href="{% url 'tasks:category_update' category.id %}"
+                                class="category-edit-link"
                                 aria-label="Edit {{ category.name }}"
                             >
-                                Edit
+                                Edit category
                             </a>
 
                             <a
                                 href="{% url 'tasks:category_delete' category.id %}"
+                                class="category-delete-link"
                                 aria-label="Delete {{ category.name }}"
                             >
                                 Delete
                             </a>
 
                         </div>
-                    </div>
 
-                    <div class="category-card-content">
+                    </article>
 
-                        <h3>{{ category.name }}</h3>
+                {% endfor %}
 
-                        <p>
-                            {% if category.description %}
-                                {{ category.description }}
-                            {% else %}
-                                No description provided.
-                            {% endif %}
-                        </p>
+            </div>
 
-                    </div>
+        {% else %}
 
-                    <div class="category-card-footer">
-                        <span>
-                            {{ category.task_count }}
-                            task{{ category.task_count|pluralize }}
-                        </span>
-                    </div>
+            <div class="category-empty-state">
 
-                </article>
+                <div class="category-empty-icon">
+                    <span aria-hidden="true">▦</span>
+                </div>
 
-            {% endfor %}
+                <h3>No categories created yet</h3>
 
-        </div>
+                <p>
+                    Start organizing your tasks by creating your
+                    first category. You can group work, personal
+                    activities, projects and more.
+                </p>
 
-    {% else %}
+                <a
+                    href="{% url 'tasks:category_create' %}"
+                    class="btn btn-primary"
+                >
+                    + Create your first category
+                </a>
 
-        <div class="category-empty-state">
+            </div>
 
-            <div class="empty-state-icon">▦</div>
+        {% endif %}
 
-            <h3>No categories yet</h3>
-
-            <p>
-                Create your first category to start organizing
-                your tasks into meaningful groups.
-            </p>
-
-            <a
-                href="{% url 'tasks:category_create' %}"
-                class="btn btn-primary"
-            >
-                Create Your First Category
-            </a>
-
-        </div>
-
-    {% endif %}
+    </div>
 
 </section>
 

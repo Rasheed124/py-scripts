@@ -8,23 +8,45 @@ def assign_existing_tasks(apps, schema_editor):
 
     database = schema_editor.connection.alias
 
-    existing_user = (
-        User.objects.using(database)
-        .get(username="adeola")
+    unassigned_tasks = Task.objects.using(database).filter(
+        user__isnull=True
     )
 
-    Task.objects.using(database).filter(
-        user__isnull=True
-    ).update(user_id=existing_user.pk)
+    if not unassigned_tasks.exists():
+        return
+
+    existing_user = (
+        User.objects.using(database)
+        .filter(username="adeola")
+        .first()
+    )
+
+    if existing_user is None:
+        raise RuntimeError(
+            "Cannot assign existing tasks: "
+            "the user 'adeola' does not exist."
+        )
+
+    unassigned_tasks.update(user_id=existing_user.pk)
 
 
 def reverse_assign_existing_tasks(apps, schema_editor):
     Task = apps.get_model("tasks", "Task")
+    User = apps.get_model("auth", "User")
 
     database = schema_editor.connection.alias
 
+    existing_user = (
+        User.objects.using(database)
+        .filter(username="adeola")
+        .first()
+    )
+
+    if existing_user is None:
+        return
+
     Task.objects.using(database).filter(
-        user__username="adeola"
+        user_id=existing_user.pk
     ).update(user_id=None)
 
 

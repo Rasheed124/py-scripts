@@ -14,4 +14,20 @@ urlpatterns = [
         views.task_toggle_complete,
         name="toggle_complete",
     ),
+
+
+
+    path("categories/", views.category_list, name="category_list"),
+    path("categories/create/", views.category_create, name="category_create"),
+    path(
+        "categories/<int:category_id>/edit/",
+        views.category_update,
+        name="category_update",
+    ),
+    path(
+        "categories/<int:category_id>/delete/",
+        views.category_delete,
+        name="category_delete",
+    ),
 ]
+

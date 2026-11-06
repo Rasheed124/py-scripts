@@ -1,29 +1,23 @@
 
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.db.models import (
-    Case,
-    When,
-    Value,
-    IntegerField,
-    Count,
-    Q,
+from django.db.models import ( Case, When, Value, IntegerField, Count, Q,
 )
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.views.decorators.http import require_POST, require_http_methods
 
-from .forms import TaskForm
-from .models import Task
+from .forms import TaskForm, CategoryForm
+from .models import Task, Category
 
 
 @login_required
 def task_list(request):
-    # Establish ownership scope first.
+
     user_tasks = Task.objects.filter(user=request.user)
     tasks = user_tasks
 
-    # Remove empty query parameters.
+
     params = request.GET.copy()
 
     for key in list(params.keys()):
@@ -161,7 +155,10 @@ def task_list(request):
 @login_required
 def task_create(request):
     if request.method == "POST":
-        form = TaskForm(request.POST)
+        form = TaskForm(
+            request.POST,
+            user=request.user,
+        )
 
         if form.is_valid():
             task = form.save(commit=False)
@@ -170,7 +167,7 @@ def task_create(request):
 
             return redirect("tasks:list")
     else:
-        form = TaskForm()
+        form = TaskForm(user=request.user)
 
     return render(
         request,
@@ -203,7 +200,11 @@ def task_update(request, task_id):
     )
 
     if request.method == "POST":
-        form = TaskForm(request.POST, instance=task)
+        form = TaskForm(
+            request.POST,
+            instance=task,
+            user=request.user,
+        )
 
         if form.is_valid():
             form.save()
@@ -213,7 +214,9 @@ def task_update(request, task_id):
                 task_id=task.pk,
             )
     else:
-        form = TaskForm(instance=task)
+        form = TaskForm(
+                instance=task,
+                user=request.user,)
 
     return render(
         request,
@@ -255,3 +258,101 @@ def task_toggle_complete(request, task_id):
     task.save(update_fields=["completed", "updated_at"])
 
     return redirect("tasks:list")
+
+
+# ==================================== CATEGORY VIEWS REDERNG =============================================================
+
+
+@login_required
+def category_list(request):
+    categories = Category.objects.filter(
+        user=request.user
+    ).annotate(
+        task_count=Count("tasks")
+    )
+
+    return render(
+        request,
+        "tasks/categories/category_list.html",
+        {"categories": categories},
+    )
+
+
+@login_required
+def category_create(request):
+    if request.method == "POST":
+        form = CategoryForm(
+            request.POST,
+            user=request.user,
+        )
+
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.user = request.user
+            category.save()
+
+            return redirect("tasks:category_list")
+
+    else:
+        form = CategoryForm(user=request.user)
+
+    return render(
+        request,
+        "tasks/categories/category_form.html",
+        {"form": form},
+    )
+
+
+@login_required
+def category_update(request, category_id):
+    category = get_object_or_404(
+        Category,
+        pk=category_id,
+        user=request.user,
+    )
+
+    if request.method == "POST":
+        form = CategoryForm(
+            request.POST,
+            instance=category,
+            user=request.user,
+        )
+
+        if form.is_valid():
+            form.save()
+            return redirect("tasks:category_list")
+
+    else:
+        form = CategoryForm(
+            instance=category,
+            user=request.user,
+        )
+
+    return render(
+        request,
+        "tasks/categories/category_form.html",
+        {
+            "form": form,
+            "category": category,
+        },
+    )
+
+
+@login_required
+@require_http_methods(["GET", "POST"])
+def category_delete(request, category_id):
+    category = get_object_or_404(
+        Category,
+        pk=category_id,
+        user=request.user,
+    )
+
+    if request.method == "POST":
+        category.delete()
+        return redirect("tasks:category_list")
+
+    return render(
+        request,
+        "tasks/categories/category_confirm_delete.html",
+        {"category": category},
+    )

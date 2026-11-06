@@ -1,0 +1,114 @@
+
+{% extends "tasks/base.html" %}
+
+{% block title %}My Categories | TaskFlow{% endblock %}
+
+{% block page_heading %}My Categories{% endblock %}
+
+{% block topbar_action %}
+    <a
+        href="{% url 'tasks:category_create' %}"
+        class="btn btn-primary"
+    >
+        + Add Category
+    </a>
+{% endblock %}
+
+{% block content %}
+
+<section class="categories-page">
+
+    <div class="section-intro">
+        <h2>Organize your tasks</h2>
+        <p>
+            Create categories to group related tasks
+            and keep your workspace organized.
+        </p>
+    </div>
+
+    {% if categories %}
+
+        <div class="category-grid">
+
+            {% for category in categories %}
+
+                <article class="category-card">
+
+                    <div class="category-card-header">
+                        <div class="category-icon">
+                            {{ category.name|first|upper }}
+                        </div>
+
+                        <div class="category-actions">
+
+                            <a
+                                href="{% url 'tasks:category_update' category.id %}"
+                                aria-label="Edit {{ category.name }}"
+                            >
+                                Edit
+                            </a>
+
+                            <a
+                                href="{% url 'tasks:category_delete' category.id %}"
+                                aria-label="Delete {{ category.name }}"
+                            >
+                                Delete
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="category-card-content">
+
+                        <h3>{{ category.name }}</h3>
+
+                        <p>
+                            {% if category.description %}
+                                {{ category.description }}
+                            {% else %}
+                                No description provided.
+                            {% endif %}
+                        </p>
+
+                    </div>
+
+                    <div class="category-card-footer">
+                        <span>
+                            {{ category.task_count }}
+                            task{{ category.task_count|pluralize }}
+                        </span>
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="category-empty-state">
+
+            <div class="empty-state-icon">▦</div>
+
+            <h3>No categories yet</h3>
+
+            <p>
+                Create your first category to start organizing
+                your tasks into meaningful groups.
+            </p>
+
+            <a
+                href="{% url 'tasks:category_create' %}"
+                class="btn btn-primary"
+            >
+                Create Your First Category
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

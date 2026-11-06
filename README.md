@@ -206,3 +206,20 @@ The objective is to understand the reasoning behind implementation decisions, no
 <!-- queryset-level access control -->
 
 <!-- Task.objects.filter(user=request.user) -->
+
+<!-- makemigrations - 	Detects model changes and generates migration files -->
+
+<!-- migrate -	Applies pending migration files to the database -->
+
+<!-- 
+   def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if user is None:
+            raise ValueError(
+                "TaskForm requires an authenticated user."
+            )
+
+        self.fields["category"].queryset = Category.objects.filter(
+            user=user
+        ) -->

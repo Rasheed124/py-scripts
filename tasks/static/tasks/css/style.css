@@ -752,6 +752,7 @@ textarea.form-control {
   border-radius: 8px;
   white-space: nowrap;
 }
+
 /* .filter-field {
     width: 170px;
     flex-shrink: 0;
@@ -894,89 +895,287 @@ textarea.form-control {
 ========================================= */
 
 .sidebar {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-account {
-    margin-top: auto;
-    padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-user {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    padding: 0 5px;
-    margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 5px;
+  margin-bottom: 18px;
 }
 
 .user-avatar {
-    width: 38px;
-    height: 38px;
-    flex-shrink: 0;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: #373b55;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 700;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #373b55;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .user-info {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .user-info strong {
-    overflow: hidden;
-    color: #ffffff;
-    font-size: 13px;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 13px;
+  text-overflow: ellipsis;
 }
 
 .user-info span {
-    color: #a5a9ba;
-    font-size: 11px;
+  color: #a5a9ba;
+  font-size: 11px;
 }
 
 .logout-form {
-    width: 100%;
+  width: 100%;
 }
 
 .logout-button {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    background: transparent;
-    color: #d1d5e2;
-    font-size: 13px;
-    text-align: left;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: transparent;
+  color: #d1d5e2;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
 }
 
 .logout-button:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
 }
 
 .logout-icon {
-    font-size: 17px;
+  font-size: 17px;
 }
 
+
+
+
+
+
+
+/* =========================================
+   CATEGORY FORM
+========================================= */
+
+.category-form-page,
+.category-delete-page {
+  width: 100%;
+}
+
+.form-container {
+  max-width: 650px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 14px;
+}
+
+.form-heading {
+  margin-bottom: 28px;
+}
+
+.form-heading h2 {
+  margin-bottom: 8px;
+  font-size: 21px;
+  color: #1e293b;
+}
+
+.form-heading p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.category-form .form-group {
+  margin-bottom: 22px;
+}
+
+.category-form label {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.category-form .form-control {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-help {
+  display: block;
+  margin-top: 7px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.field-error {
+  display: block;
+  margin-top: 7px;
+  color: #dc2626;
+  font-size: 12px;
+}
+
+.form-error {
+  margin-bottom: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+/* =========================================
+   CATEGORY DELETE CONFIRMATION
+========================================= */
+
+.delete-confirmation-card {
+  max-width: 620px;
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 14px;
+}
+
+.delete-warning-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  background: #fef2f2;
+  color: #dc2626;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.delete-confirmation-content h2 {
+  margin-bottom: 12px;
+  color: #1e293b;
+  font-size: 22px;
+}
+
+.delete-confirmation-content>p {
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.delete-information {
+  margin: 22px 0;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 9px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.delete-information p {
+  margin: 0 0 12px;
+}
+
+.delete-information p:last-child {
+  margin-bottom: 0;
+}
+
+.delete-notice {
+  padding: 14px;
+  margin-bottom: 24px;
+  border: 1px solid #fde68a;
+  background: #fffbeb;
+  border-radius: 8px;
+  color: #92400e;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.delete-form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .form-container,
+  .delete-confirmation-card {
+    padding: 20px;
+  }
+
+  .form-actions,
+  .delete-form {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions .btn,
+  .delete-form .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+
+
+
+
+
+
+
 @media (max-width: 768px) {
-    .sidebar-account {
-        margin-top: 20px;
-    }
+  .sidebar-account {
+    margin-top: 20px;
+  }
 }
 
 

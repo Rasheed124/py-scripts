@@ -1,0 +1,86 @@
+
+{% extends "tasks/base.html" %}
+
+{% block title %}Delete Category | TaskFlow{% endblock %}
+
+{% block page_heading %}Delete Category{% endblock %}
+
+{% block topbar_action %}
+    <a
+        href="{% url 'tasks:category_list' %}"
+        class="btn btn-secondary"
+    >
+        Back to Categories
+    </a>
+{% endblock %}
+
+{% block content %}
+
+<section class="category-delete-page">
+
+    <div class="delete-confirmation-card">
+
+        <div class="delete-warning-icon">
+            !
+        </div>
+
+        <div class="delete-confirmation-content">
+
+            <h2>Delete this category?</h2>
+
+            <p>
+                You are about to delete
+                <strong>{{ category.name }}</strong>.
+            </p>
+
+            <div class="delete-information">
+
+                <p>
+                    {% if category.description %}
+                        {{ category.description }}
+                    {% else %}
+                        No description provided.
+                    {% endif %}
+                </p>
+
+                <p>
+                    <strong>{{ category.tasks.count }}</strong>
+                    task{{ category.tasks.count|pluralize }}
+                    currently belong to this category.
+                </p>
+
+            </div>
+
+            <div class="delete-notice">
+                <strong>Important:</strong>
+                Deleting this category will not delete its tasks.
+                Those tasks will simply become uncategorized.
+            </div>
+
+            <form method="POST" class="delete-form">
+
+                {% csrf_token %}
+
+                <a
+                    href="{% url 'tasks:category_list' %}"
+                    class="btn btn-secondary"
+                >
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn btn-danger"
+                >
+                    Delete Category
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

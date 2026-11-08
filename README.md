@@ -215,3 +215,103 @@ The objective is to understand the reasoning behind implementation decisions, no
 <!-- class Meta -->
 <!-- Django uses this Python feature to provide configuration information about another class. -->
 
+
+
+
+
+
+
+ Revised Level 4 roadmap
+I recommend dividing Level 4 into six engineering phases.
+1. Phase 4.1 — Production readiness
+   First priority
+   Prepare the existing application for production.
+   - Review and separate development and production settings.
+   - Configure environment variables and secrets.
+   - Introduce PostgreSQL.
+   - Configure Gunicorn and WhiteNoise.
+   - Configure production static files.
+   - Review security settings.
+   - Run python manage.py check --deploy.
+   - Prepare deployment documentation.
+2. Phase 4.2 — Initial deployment
+
+   Deploy the existing TaskFlow application to Render.
+   - Create the production database.
+   - Configure the web service.
+   - Configure production environment variables.
+   - Apply migrations.
+   - Create the production superuser.
+   - Verify authentication, task CRUD, categories and static files.
+   - Test the deployed application.
+3. Phase 4.3 — Continuous Integration (CI)
+
+   Establish automated quality checks using GitHub Actions.
+   - Create a workflow configuration.
+   - Configure Python and dependency installation.
+   - Run Django system checks.
+   - Check migration consistency.
+   - Run all 84 existing tests.
+   - Configure pull-request checks.
+   - Protect the production branch.
+4. Phase 4.4 — Continuous Deployment (CD)
+
+   Automate controlled production deployments.
+   - Connect successful CI runs to deployment.
+   - Manage deployment secrets securely.
+   - Automate static collection and migrations.
+   - Verify deployment success.
+   - Understand failed deployments and rollback procedures.
+   - Establish a release and versioning process.
+5. Phase 4.5 — Advanced application features
+
+   Now develop the remaining TaskFlow functionality:
+   Feature	Engineering concepts
+   Reminders and email notifications	Email delivery, scheduling, background jobs
+   Recurring tasks	Date calculations, scheduling, business rules
+   Calendar view	Date queries, calendar interfaces
+   Bulk task actions	Bulk updates, transactions
+   CSV export	Data serialization, HTTP responses
+   REST API	Django REST Framework, serializers, permissions, API authentication
+   Expanded automated tests	Integration, API, edge-case and regression testing
+6. Phase 4.6 — Production monitoring and maintenance
+   - Application logging.
+   - Error monitoring.
+   - Database backup and recovery.
+   - Performance monitoring.
+   - Dependency updates.
+   - Security reviews.
+   - Production troubleshooting.
+This ordering means that every new feature will pass through the CI pipeline and be deployed using the same production workflow.
+
+For reminders, for example, we can later introduce Celery and Redis when we reach background scheduling. We don't need to install them before understanding the deployment foundation.
+5. Production configuration and security principles
+These are non-negotiable engineering practices for this project.
+Area	Engineering rule
+Secret key	Never commit production secrets
+Debug	DEBUG=False in production
+Hosts	Explicit production ALLOWED_HOSTS
+Database	PostgreSQL for production
+HTTPS	Enforce secure connections
+Static files	collectstatic and WhiteNoise
+Migrations	Version-controlled and applied carefully
+Passwords	Continue using Django's authentication system
+Logs	Capture production errors
+Backups	Establish a database recovery strategy
+
+We should also follow Django's deployment checklist rather than assuming that a successful deployment means the application is secure.
+GitHub+2
+
+One correction to our previous settings review
+I want to correct something I said earlier about your email configuration.
+
+You are using Django 6.1.2. Django 6.1 introduced MAILERS, replacing the older EMAIL_BACKEND configuration. Therefore, your original MAILERS setting was correct. We should retain the Django 6.1 approach when we implement email notifications.
+Django+2
+
+
+
+
+
+git switch --track origin/todo-list
+git status --short --branch
+git branch -avv

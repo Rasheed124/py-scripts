@@ -1,0 +1,78 @@
+
+{% extends "tasks/base.html" %}
+
+{% block title %}{{ task.title }} | TaskFlow{% endblock %}
+{% block page_heading %}Task Details{% endblock %}
+
+{% block content %}
+
+<div class="content-card">
+
+    <div class="detail-header">
+        <div>
+            <span class="eyebrow">TASK INFORMATION</span>
+            <h2 class="detail-title">{{ task.title }}</h2>
+        </div>
+
+        {% if task.completed %}
+            <span class="status-badge status-completed">Completed</span>
+        {% else %}
+            <span class="status-badge status-pending">Pending</span>
+        {% endif %}
+    </div>
+
+    <div class="detail-section">
+        <h3>Description</h3>
+
+        {% if task.description %}
+            <p class="detail-description">{{ task.description|linebreaksbr }}</p>
+        {% else %}
+            <p class="muted">No description provided.</p>
+        {% endif %}
+    </div>
+
+    <div class="detail-grid">
+
+        <div class="detail-item">
+            <span>Priority</span>
+            <strong class="priority priority-{{ task.priority }}">
+                {{ task.get_priority_display }}
+            </strong>
+        </div>
+
+        <div class="detail-item">
+            <span>Due Date</span>
+            <strong>
+                {% if task.due_date %}
+                    {{ task.due_date|date:"M d, Y" }}
+                {% else %}
+                    Not specified
+                {% endif %}
+            </strong>
+        </div>
+
+        <div class="detail-item">
+            <span>Created</span>
+            <strong>{{ task.created_at|date:"M d, Y - H:i" }}</strong>
+        </div>
+
+        <div class="detail-item">
+            <span>Last Updated</span>
+            <strong>{{ task.updated_at|date:"M d, Y - H:i" }}</strong>
+        </div>
+
+    </div>
+
+    <div class="form-actions">
+        <a href="{% url 'tasks:list' %}" class="btn btn-secondary">
+            Back to Tasks
+        </a>
+
+        <a href="{% url 'tasks:update' task.id %}" class="btn btn-primary">
+            Edit Task
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}TaskFlow Authentication{% endblock %}</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'accounts/css/auth.css' %}"
+    >
+</head>
+
+<body class="auth-body">
+
+    <main class="auth-layout">
+
+        <a href="{% url 'accounts:login' %}" class="auth-brand">
+            <span class="auth-brand-icon">T</span>
+            <span>TaskFlow</span>
+        </a>
+
+        <section class="auth-card">
+
+            {% block auth_content %}{% endblock %}
+
+        </section>
+
+        <footer class="auth-footer">
+            <p>
+                TaskFlow &copy; {% now "Y" %}.
+                Stay focused and get things done.
+            </p>
+        </footer>
+
+    </main>
+
+</body>
+</html>

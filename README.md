@@ -215,24 +215,3 @@ The objective is to understand the reasoning behind implementation decisions, no
 <!-- class Meta -->
 <!-- Django uses this Python feature to provide configuration information about another class. -->
 
-
-5. How I recommend we finish Level 3
-Rather than adding more features, let's conduct a structured code audit.
-1. Stage 1 — Accounts audit
-
-   Review registration, login, logout, forms and authentication settings.
-2. Stage 2 — Task and category authorization audit
-
-   Review models, forms, views and querysets for ownership and data integrity.
-3. Stage 3 — Automated testing
-
-   Complete the missing tests and run the entire test suite.
-4. Stage 4 — Code quality and structure
-
-   Review duplication, naming, responsibilities, error handling and project organization.
-5. Stage 5 — Final verification
-
-   Run Django checks, migrations checks, tests and a manual functionality review. Update the README.
-
-
-   Engineering lesson: A test should verify the intended behaviour of your application, not force the application to behave according to an incorrect assumption

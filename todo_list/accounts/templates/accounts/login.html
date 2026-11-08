@@ -1,0 +1,64 @@
+
+{% extends "accounts/base_auth.html" %}
+
+{% block title %}Login | TaskFlow{% endblock %}
+
+{% block auth_content %}
+
+<div class="auth-header">
+    <span class="auth-eyebrow">YOUR PERSONAL WORKSPACE</span>
+
+    <h1>Welcome back</h1>
+
+    <p>
+        Log in to continue managing your tasks and staying productive.
+    </p>
+</div>
+
+<form method="POST" novalidate class="auth-form">
+
+    {% csrf_token %}
+
+    <input type="hidden" name="next" value="{{ next }}">
+
+    {% if form.non_field_errors %}
+        <div class="auth-alert auth-alert-error" role="alert">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    {% for field in form %}
+        <div class="auth-form-group">
+
+            <label for="{{ field.id_for_label }}">
+                {{ field.label }}
+            </label>
+
+            {{ field }}
+
+            {% for error in field.errors %}
+                <small class="auth-field-error">
+                    {{ error }}
+                </small>
+            {% endfor %}
+
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="auth-submit">
+        Sign in
+    </button>
+
+</form>
+
+<div class="auth-alternative">
+    <p>
+        Don't have an account?
+
+        <a href="{% url 'accounts:register' %}">
+            Create an account
+        </a>
+    </p>
+</div>
+
+{% endblock %}

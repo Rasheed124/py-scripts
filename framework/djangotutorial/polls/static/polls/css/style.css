@@ -1,0 +1,12 @@
+body {
+  background-color: #ffeefe;
+  font-family: Arial, sans-serif;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+a {
+  color: green;
+}

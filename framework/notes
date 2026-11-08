@@ -1,0 +1,68 @@
+# Adeola12345
+
+
+
+
+
+
+
+
+
+
+
+templates/admin/inde.html
+
+Each view is responsible for doing one of two things:
+
+returning an HttpResponse object containing the content for the requested page,
+
+or raising an exception such as Http404. The rest is up to you.
+
+url/views/templates
+
+URL - VIEWS - TEMPLATE
+
+Use generic views: Less code is better
+
+Generic views are used when your view follows a common pattern that Django can handle for you.
+
+
+
+Testing concept -  best practice is -  test-driven development, 
+
+ wrote the test first and then the code to fix it. 
+
+
+Test Internal behaviour  - focused on the internal behavior of the code. 
+
+For this test -  we want to check its behavior as it would be experienced by a user through a web browser.
+
+
+
+
+<!-- TEST CASES RULES -->
+
+
+As long as your tests are sensibly arranged, they won’t become unmanageable. Good rules-of-thumb include having:
+
+a separate TestClass for each model or view
+
+a separate test method for each set of conditions you want to test
+
+test method names that describe their function
+
+
+
+” framework such as Selenium to test the way your HTML actually renders in a browser. 
+
+Django includes LiveServerTestCase to facilitate integration with tools like Selenium.
+
+
+django.contrib.staticfiles -   it collects static files from each of your applications (and any other places you specify) into a single location that can easily be served in production.
+
+
+AppDirectoriesFinder - the 
+
+Static file namespacing - / static/polls/style.cs
+
+Just like templates, we might be able to get away with putting our static files directly in polls/static (rather than creating another polls subdirectory), but it would actually be a bad idea. Django will choose the first static file it finds whose name matches, and if you had a static file with the same name in a different application, Django would be unable to distinguish between them. We need to be able to point Django at the right one, and the best way to ensure this is by namespacing them. That is, by putting those static files inside another directory named for the application itself.

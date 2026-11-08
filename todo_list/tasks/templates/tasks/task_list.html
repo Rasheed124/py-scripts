@@ -1,0 +1,418 @@
+
+{% extends "tasks/base.html" %}
+
+{% block title %}All Tasks | TaskFlow{% endblock %}
+{% block page_heading %}My Tasks{% endblock %}
+
+{% block content %}
+
+
+<div class="task-toolbar">
+    <form method="GET" action="{% url 'tasks:list' %}" class="task-toolbar-form">
+
+        <!-- Search -->
+        <div class="search-field">
+            <span class="search-icon">⌕</span>
+
+            <input
+                type="search"
+                name="q"
+                value="{{ query }}"
+                placeholder="Search tasks by title or description..."
+                class="form-control"
+                aria-label="Search tasks"
+            >
+        </div>
+
+        <!-- Status Filter -->
+        <div class="filter-field">
+            <select name="status" class="form-control"  aria-label="Filter tasks by status">
+                <option value="">All Statuses</option>
+
+                <option value="pending"
+                    {% if status == "pending" %}selected{% endif %}>
+                    Pending
+                </option>
+
+                <option value="completed"
+                    {% if status == "completed" %}selected{% endif %}>
+                    Completed
+                </option>
+            </select>
+        </div>
+
+        <!-- Priority Filter -->
+        <div class="filter-field">
+            <select name="priority" class="form-control"  aria-label="Filter tasks by priority">
+                <option value="">All Priorities</option>
+
+                <option value="low"
+                    {% if priority == "low" %}selected{% endif %}>
+                    Low Priority
+                </option>
+
+                <option value="medium"
+                    {% if priority == "medium" %}selected{% endif %}>
+                    Medium Priority
+                </option>
+
+                <option value="high"
+                    {% if priority == "high" %}selected{% endif %}>
+                    High Priority
+                </option>
+            </select>
+        </div>
+
+        <!-- Schedule Filter -->
+        <div class="filter-field">
+            <select name="schedule" class="form-control"  aria-label="Filter tasks by schedule">
+
+                <option value=""
+                    {% if not schedule %}selected{% endif %}>
+                    All Dates
+                </option>
+
+                <option value="today"
+                    {% if schedule == "today" %}selected{% endif %}>
+                    Due Today
+                </option>
+
+                <option value="upcoming"
+                    {% if schedule == "upcoming" %}selected{% endif %}>
+                    Upcoming
+                </option>
+
+                <option value="overdue"
+                    {% if schedule == "overdue" %}selected{% endif %}>
+                    Overdue
+                </option>
+
+            </select>
+        </div>
+
+        <!-- Sorting -->
+        <div class="filter-field">
+            <select name="sort" class="form-control"  aria-label="Filter tasks by sort">
+                <option value="newest"
+                    {% if sort == "newest" %}selected{% endif %}>
+                    Newest First
+                </option>
+
+                <option value="oldest"
+                    {% if sort == "oldest" %}selected{% endif %}>
+                    Oldest First
+                </option>
+
+                <option value="due_earliest"
+                    {% if sort == "due_earliest" %}selected{% endif %}>
+                    Due Date: Earliest
+                </option>
+
+                <option value="due_latest"
+                    {% if sort == "due_latest" %}selected{% endif %}>
+                    Due Date: Latest
+                </option>
+
+                <option value="priority_high"
+                    {% if sort == "priority_high" %}selected{% endif %}>
+                    Highest Priority
+                </option>
+
+                <option value="priority_low"
+                    {% if sort == "priority_low" %}selected{% endif %}>
+                    Lowest Priority
+                </option>
+            </select>
+        </div>
+
+        <!-- Actions -->
+        <div class="toolbar-actions">
+            <button type="submit" class="btn btn-primary">
+                Apply
+            </button>
+
+           {% if query or status or priority or schedule or sort != "newest" %}
+                <a href="{% url 'tasks:list' %}" class="btn btn-secondary">
+                    Clear
+                </a>
+            {% endif %}
+        </div>
+
+    </form>
+</div>
+
+
+
+<div class="welcome-section">
+    <div>
+        <h2>Stay organized.</h2>
+        <p>Keep track of what needs to get done.</p>
+    </div>
+
+    <a href="{% url 'tasks:create' %}" class="btn btn-primary">
+        + Create New Task
+    </a>
+</div>
+
+<div class="stats-grid">
+
+    <!-- Total Tasks -->
+    <div class="stat-card">
+        <span class="stat-label">Total Tasks</span>
+        <strong class="stat-value">{{ total_tasks }}</strong>
+        <span class="stat-description">All your tasks</span>
+    </div>
+
+    <!-- Pending Tasks -->
+    <div class="stat-card">
+        <span class="stat-label">Pending</span>
+        <strong class="stat-value">{{ pending_tasks }}</strong>
+        <span class="stat-description">Still to be completed</span>
+    </div>
+
+    <!-- Completed Tasks -->
+    <div class="stat-card">
+        <span class="stat-label">Completed</span>
+        <strong class="stat-value">{{ completed_tasks }}</strong>
+        <span class="stat-description">Successfully finished</span>
+    </div>
+
+    <!-- Overdue Tasks -->
+    <div class="stat-card">
+        <span class="stat-label">Overdue</span>
+        <strong class="stat-value">{{ overdue_tasks }}</strong>
+        <span class="stat-description">Past their deadlines</span>
+    </div>
+
+</div>
+
+<div class="progress-card">
+
+    <div class="progress-header">
+        <div>
+            <h3>Task Completion</h3>
+            <p>Overall progress across all your tasks</p>
+        </div>
+
+        <strong>{{ completion_rate }}%</strong>
+    </div>
+
+    <div
+    class="progress-track"
+    role="progressbar"
+    aria-valuenow="{{ completion_rate }}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-label="Task completion progress"
+>
+     <div
+            class="progress-fill"
+            style="width: {{ completion_rate }}%;"
+        ></div>
+</div>
+
+    <span class="progress-description">
+        {{ completed_tasks }} of {{ total_tasks }} tasks completed
+    </span>
+
+</div>
+
+<div class="section-heading">
+    <div>
+        <h2>All Tasks</h2>
+        <p>Your current task list</p>
+    </div>
+    <span class="task-count">
+        {{ page_obj.paginator.count }} tasks
+    </span>
+</div>
+
+<div class="task-list">
+
+    {% for task in tasks %}
+
+        <article class="task-card">
+
+            <div class="task-card-main">
+
+                <form
+                    method="POST"
+                    action="{% url 'tasks:toggle_complete' task.id %}"
+                    class="completion-form"
+                >
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="completion-button {% if task.completed %}is-completed{% endif %}"
+                        aria-label="{% if task.completed %}Mark as pending{% else %}Mark as completed{% endif %}"
+                    >
+                        {% if task.completed %}✓{% endif %}
+                    </button>
+                </form>
+
+                <div class="task-information">
+                    <a href="{% url 'tasks:detail' task.id %}"
+                       class="task-title {% if task.completed %}completed-title{% endif %}">
+                        {{ task.title }}
+                    </a>
+
+                    {% if task.description %}
+                        <p class="task-description">
+                            {{ task.description|truncatechars:100 }}
+                        </p>
+                    {% else %}
+                        <p class="task-description muted">
+                            No description provided.
+                        </p>
+                    {% endif %}
+
+                    <div class="task-metadata">
+
+                        <span class="priority priority-{{ task.priority }}">
+                            {{ task.get_priority_display }}
+                        </span>
+
+                    {% if task.due_date %}
+                        {% if task.due_date < today and not task.completed %}
+                            <span class="status-badge status-overdue">
+                                Overdue
+                            </span>
+                        {% elif task.due_date == today and not task.completed %}
+                            <span class="status-badge status-today">
+                                Due Today
+                            </span>
+                        {% else %}
+                            <span class="task-due-date">
+                                Due {{ task.due_date|date:"M d, Y" }}
+                            </span>
+                        {% endif %}
+                    {% endif %}
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="task-card-actions">
+                <a href="{% url 'tasks:update' task.id %}"
+                   class="action-link">
+                    Edit
+                </a>
+
+                <a href="{% url 'tasks:delete' task.id %}"
+                   class="action-link action-delete">
+                    Delete
+                </a>
+            </div>
+
+        </article>
+
+
+
+        {% empty %}
+
+            <div class="empty-state">
+
+                {% if query or status or priority or schedule %}
+
+                    <div class="empty-state-icon">⌕</div>
+
+                    <h3>No matching tasks found</h3>
+
+                    {% if query %}
+                        <p>
+                            We couldn't find any tasks matching
+                            <strong>"{{ query }}"</strong>.
+                        </p>
+                    {% else %}
+                        <p>
+                            No tasks match your current search and filter criteria.
+                        </p>
+                    {% endif %}
+
+                    <p class="empty-state-hint">
+                        Try changing your search term or adjusting your filters.
+                    </p>
+
+                    <a href="{% url 'tasks:list' %}" class="btn btn-secondary">
+                        Clear Search & Filters
+                    </a>
+
+                {% else %}
+
+                    <div class="empty-state-icon">✓</div>
+
+                    <h3>No tasks yet</h3>
+
+                    <p>
+                        You haven't created any tasks.
+                        Start organizing your work by adding your first task.
+                    </p>
+
+                    <a href="{% url 'tasks:create' %}" class="btn btn-primary">
+                        Create Your First Task
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        {% endfor %}
+
+
+
+</div>
+
+
+<!-- ------------------- PAGINATION ------------------------------------- -->
+
+{% if page_obj.has_other_pages %}
+    <div class="pagination">
+
+        {% if page_obj.has_previous %}
+            <a href="?{{ page_base_url }}{% if page_base_url %}&{% endif %}page={{ page_obj.previous_page_number }}"
+               class="pagination-btn">
+                Previous
+            </a>
+        {% else %}
+            <span class="pagination-btn disabled">
+                Previous
+            </span>
+        {% endif %}
+
+        <div class="pagination-pages">
+            {% for num in page_obj.paginator.page_range %}
+
+                {% if page_obj.number == num %}
+                    <span class="pagination-number active">
+                        {{ num }}
+                    </span>
+                {% else %}
+                    <a href="?{{ page_base_url }}{% if page_base_url %}&{% endif %}page={{ num }}"
+                       class="pagination-number">
+                        {{ num }}
+                    </a>
+                {% endif %}
+
+            {% endfor %}
+        </div>
+
+        {% if page_obj.has_next %}
+            <a href="?{{ page_base_url }}{% if page_base_url %}&{% endif %}page={{ page_obj.next_page_number }}"
+               class="pagination-btn">
+                Next
+            </a>
+        {% else %}
+            <span class="pagination-btn disabled">
+                Next
+            </span>
+        {% endif %}
+
+    </div>
+{% endif %}
+
+
+
+
+{% endblock %}

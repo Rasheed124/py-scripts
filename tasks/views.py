@@ -274,6 +274,7 @@ def task_toggle_complete(request, task_id):
 
 
 @login_required
+@require_GET
 def category_list(request):
     categories = Category.objects.filter(
         user=request.user
@@ -312,6 +313,7 @@ def category_list(request):
 
 
 @login_required
+@require_http_methods(["GET", "POST"])
 def category_create(request):
     if request.method == "POST":
         form = CategoryForm(
@@ -337,6 +339,7 @@ def category_create(request):
 
 
 @login_required
+@require_http_methods(["GET", "POST"])
 def category_update(request, category_id):
     category = get_object_or_404(
         Category,

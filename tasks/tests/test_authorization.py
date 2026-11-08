@@ -1,150 +1,16 @@
-from datetime import timedelta
-
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
-from django.utils import timezone
 
-from .models import Task
+from tasks.models import Task
 
 
 User = get_user_model()
 
 
-class TaskModelTests(TestCase):
-
-    def setUp(self):
-        self.user = User.objects.create_user(
-            username="modeluser",
-            password="TestPassword123!",
-        )
-
-    def test_task_creation(self):
-        task = Task.objects.create(
-            user=self.user,
-            title="Learn Django Testing",
-            priority=Task.Priority.HIGH,
-        )
-
-        self.assertEqual(task.title, "Learn Django Testing")
-        self.assertEqual(task.priority, Task.Priority.HIGH)
-        self.assertFalse(task.completed)
-
-    def test_task_string_representation(self):
-        task = Task.objects.create(
-            user=self.user,
-            title="Build Todo Application",
-        )
-
-        self.assertEqual(str(task), "Build Todo Application")
-
-    def test_task_default_priority(self):
-        task = Task.objects.create(
-            user=self.user,
-            title="Understand Django Models",
-        )
-
-        self.assertEqual(task.priority, Task.Priority.MEDIUM)
-
-class TaskCreateViewTests(TestCase):
-
-    def setUp(self):
-        self.user = User.objects.create_user(
-            username="creator",
-            password="TestPassword123!",
-        )
-
-        self.client.force_login(self.user)
-
-    def test_create_task_page_returns_200(self):
-        response = self.client.get(reverse("tasks:create"))
-
-        self.assertEqual(response.status_code, 200)
-
-    def test_create_task_successfully(self):
-        response = self.client.post(
-            reverse("tasks:create"),
-            {
-                "title": "Build Todo Application",
-                "description": "Implement Django CRUD.",
-                "priority": Task.Priority.HIGH,
-                "due_date": "",
-            },
-        )
-
-        self.assertEqual(Task.objects.count(), 1)
-
-        task = Task.objects.get()
-
-        self.assertEqual(task.title, "Build Todo Application")
-        self.assertEqual(task.priority, Task.Priority.HIGH)
-        self.assertEqual(task.user, self.user)
-
-        self.assertRedirects(response, reverse("tasks:list"))
-
-    def test_create_task_with_empty_title(self):
-        response = self.client.post(
-            reverse("tasks:create"),
-            {
-                "title": "",
-                "description": "A task without a title.",
-                "priority": Task.Priority.MEDIUM,
-                "due_date": "",
-            },
-        )
-
-        self.assertEqual(Task.objects.count(), 0)
-        self.assertEqual(response.status_code, 200)
-
-        self.assertFormError(
-            response.context["form"],
-            "title",
-            "This field is required.",
-        )
-
-class TaskListFeatureTests(TestCase):
-
-    def setUp(self):
-        self.user = User.objects.create_user(
-            username="listuser",
-            password="TestPassword123!",
-        )
-
-        self.client.force_login(self.user)
-
-        today = timezone.localdate()
-
-        self.task_one = Task.objects.create(
-            user=self.user,
-            title="Learn Django",
-            description="Study Django ORM",
-            priority="high",
-            completed=False,
-            due_date=today,
-        )
-
-        self.task_two = Task.objects.create(
-            user=self.user,
-            title="Build Portfolio",
-            description="Create a developer portfolio",
-            priority="medium",
-            completed=True,
-            due_date=today + timedelta(days=3),
-        )
-
-        self.task_three = Task.objects.create(
-            user=self.user,
-            title="Read Python",
-            description="Practice Python fundamentals",
-            priority="low",
-            completed=False,
-            due_date=today - timedelta(days=2),
-        )
-
 class TaskAuthorizationTests(TestCase):
 
     def setUp(self):
-
         self.user_a = User.objects.create_user(
             username="adeola",
             email="adeola@example.com",
@@ -232,10 +98,7 @@ class TaskAuthorizationTests(TestCase):
 
         self.task_b.refresh_from_db()
 
-        self.assertEqual(
-            self.task_b.title,
-            "Study Python",
-        )
+        self.assertEqual(self.task_b.title, "Study Python")
 
     def test_user_cannot_delete_another_users_task(self):
         self.client.force_login(self.user_a)
@@ -349,4 +212,3 @@ class TaskAuthorizationTests(TestCase):
         self.task_a.refresh_from_db()
 
         self.assertFalse(self.task_a.completed)
-

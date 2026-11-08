@@ -5,13 +5,16 @@ from django.db.models import ( Case, When, Value, IntegerField, Count, Q,
 )
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from django.views.decorators.http import require_POST, require_http_methods
+from django.views.decorators.http import require_POST, require_http_methods, require_GET, require_http_methods
 
 from .forms import TaskForm, CategoryForm
 from .models import Task, Category
 
+TASKS_PER_PAGE = 3
+
 
 @login_required
+@require_GET
 def task_list(request):
 
     user_tasks = Task.objects.filter(user=request.user)
@@ -98,7 +101,7 @@ def task_list(request):
         )
 
     # Pagination.
-    paginator = Paginator(tasks, 3)
+    paginator = Paginator(tasks, TASKS_PER_PAGE)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -153,6 +156,7 @@ def task_list(request):
 
 
 @login_required
+@require_http_methods(["GET", "POST"])
 def task_create(request):
     if request.method == "POST":
         form = TaskForm(
@@ -163,6 +167,8 @@ def task_create(request):
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
+
+            task.full_clean()
             task.save()
 
             return redirect("tasks:list")
@@ -177,6 +183,7 @@ def task_create(request):
 
 
 @login_required
+@require_GET
 def task_detail(request, task_id):
     task = get_object_or_404(
         Task,
@@ -192,6 +199,7 @@ def task_detail(request, task_id):
 
 
 @login_required
+@require_http_methods(["GET", "POST"])
 def task_update(request, task_id):
     task = get_object_or_404(
         Task,
@@ -260,6 +268,8 @@ def task_toggle_complete(request, task_id):
     return redirect("tasks:list")
 
 
+
+
 # ==================================== CATEGORY VIEWS REDERNG =============================================================
 
 
@@ -268,14 +278,37 @@ def category_list(request):
     categories = Category.objects.filter(
         user=request.user
     ).annotate(
-        task_count=Count("tasks")
+        task_count=Count(
+            "tasks",
+            filter=Q(tasks__user=request.user),
+        )
     )
+
+    task_stats = Task.objects.filter(
+        user=request.user
+    ).aggregate(
+        categorized_tasks=Count(
+            "id",
+            filter=Q(category__isnull=False),
+        ),
+        uncategorized_tasks=Count(
+            "id",
+            filter=Q(category__isnull=True),
+        ),
+    )
+
+    context = {
+        "categories": categories,
+        "total_categories": categories.count(),
+        **task_stats,
+    }
 
     return render(
         request,
         "tasks/categories/category_list.html",
-        {"categories": categories},
+        context,
     )
+
 
 
 @login_required
@@ -347,6 +380,14 @@ def category_delete(request, category_id):
         user=request.user,
     )
 
+    task_count = category.tasks.count()
+
+
+    context = {
+        "category": category,
+        "task_count": task_count,
+    }
+
     if request.method == "POST":
         category.delete()
         return redirect("tasks:category_list")
@@ -354,5 +395,5 @@ def category_delete(request, category_id):
     return render(
         request,
         "tasks/categories/category_confirm_delete.html",
-        {"category": category},
+        context,
     )

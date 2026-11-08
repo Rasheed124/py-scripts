@@ -18,11 +18,11 @@
         <p>Fill in the details below to organize your task.</p>
     </div>
 
-    <form method="POST" novalidate>
+    <form method="POST" >
         {% csrf_token %}
 
         {% if form.non_field_errors %}
-            <div class="alert alert-error">
+            <div class="alert alert-error" role="alert">
                 {{ form.non_field_errors }}
             </div>
         {% endif %}

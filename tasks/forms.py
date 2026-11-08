@@ -1,5 +1,7 @@
 
+
 from django import forms
+
 from .models import Task, Category
 
 
@@ -55,36 +57,27 @@ class TaskForm(forms.ModelForm):
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
 
-        if user is None:
+        if user is None or not user.is_authenticated:
             raise ValueError(
-                "TaskForm requires an authenticated user."
+                "An authenticated user is required."
             )
 
         self.fields["category"].queryset = Category.objects.filter(
             user=user
         )
 
-    def clean_title(self):
-        title = self.cleaned_data["title"].strip()
-
-        if not title:
-            raise forms.ValidationError(
-                "Please enter a task title."
-            )
-
-        return title
-
 
 class CategoryForm(forms.ModelForm):
 
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
-        self.user = user
 
-        if user is None:
+        if user is None or not user.is_authenticated:
             raise ValueError(
-                "CategoryForm requires an authenticated user."
+                "An authenticated user is required."
             )
+
+        self.user = user
 
     class Meta:
         model = Category
@@ -110,6 +103,8 @@ class CategoryForm(forms.ModelForm):
         help_texts = {
             "name": "Choose a clear name for this category.",
         }
+
+
 
     def clean_name(self):
         name = self.cleaned_data["name"].strip()

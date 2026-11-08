@@ -26,7 +26,7 @@
 
         <!-- Status Filter -->
         <div class="filter-field">
-            <select name="status" class="form-control">
+            <select name="status" class="form-control"  aria-label="Filter tasks by status">
                 <option value="">All Statuses</option>
 
                 <option value="pending"
@@ -43,7 +43,7 @@
 
         <!-- Priority Filter -->
         <div class="filter-field">
-            <select name="priority" class="form-control">
+            <select name="priority" class="form-control"  aria-label="Filter tasks by priority">
                 <option value="">All Priorities</option>
 
                 <option value="low"
@@ -65,7 +65,7 @@
 
         <!-- Schedule Filter -->
         <div class="filter-field">
-            <select name="schedule" class="form-control">
+            <select name="schedule" class="form-control"  aria-label="Filter tasks by schedule">
 
                 <option value=""
                     {% if not schedule %}selected{% endif %}>
@@ -92,7 +92,7 @@
 
         <!-- Sorting -->
         <div class="filter-field">
-            <select name="sort" class="form-control">
+            <select name="sort" class="form-control"  aria-label="Filter tasks by sort">
                 <option value="newest"
                     {% if sort == "newest" %}selected{% endif %}>
                     Newest First
@@ -140,6 +140,9 @@
 
     </form>
 </div>
+
+
+
 <div class="welcome-section">
     <div>
         <h2>Stay organized.</h2>

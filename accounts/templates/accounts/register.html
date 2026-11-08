@@ -15,7 +15,7 @@
     </p>
 </div>
 
-<form method="POST" novalidate class="auth-form">
+<form method="POST"  class="auth-form">
 
     {% csrf_token %}
 
@@ -40,7 +40,7 @@
 
             {% if field.help_text %}
                 <div class="auth-help-text">
-                    {{ field.help_text|safe }}
+                    {{ field.help_text }}
                 </div>
             {% endif %}
 

@@ -23,16 +23,6 @@ DATABASES = {
 DATABASES["default"]["CONN_MAX_AGE"] = 600
 
 
-# PostgreSQL database
-# DATABASES = {
-#     "default": env.db(
-#         "DATABASE_URL",
-#         default="postgres://localhost:5432/taskflow",
-#     ),
-# }
-
-# DATABASES["default"]["CONN_MAX_AGE"] = 600
-
 
 # WhiteNoise static-file configuration
 MIDDLEWARE.insert(
@@ -60,3 +50,24 @@ SECURE_SSL_REDIRECT = True
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+
+
+
+# Production logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}

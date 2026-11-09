@@ -9,3 +9,6 @@ pip install -r requirements.txt
 
 # Collect production static files
 python manage.py collectstatic --noinput
+
+
+python manage.py migrate --noinput && gunicorn config.wsgi:application

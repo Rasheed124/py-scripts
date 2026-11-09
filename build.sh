@@ -8,6 +8,6 @@ set -o errexit
 pip install -r requirements.txt
 
 # Collect production static files
-python manage.py collectstatic --noinput
+python manage.py collectstatic
 
 

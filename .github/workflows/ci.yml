@@ -1,5 +1,12 @@
 
-name: TaskFlow CI
+name: TaskFlow CI/CD
+
+permissions:
+  contents: read
+
+concurrency:
+  group: taskflow-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 on:
   push:
@@ -16,6 +23,7 @@ jobs:
   quality-checks:
     name: Django Quality Checks
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
@@ -25,7 +33,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.14"
-          cache: "pip"
+          cache: pip
 
       - name: Install dependencies
         run: |
@@ -49,3 +57,53 @@ jobs:
           SECRET_KEY: ci-test-secret-key-not-for-production
           DJANGO_SETTINGS_MODULE: config.settings.development
         run: python manage.py test
+
+  deploy:
+    name: Deploy to Render
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: quality-checks
+
+    if: >
+      github.ref == 'refs/heads/todo-list' &&
+      (github.event_name == 'push' ||
+       github.event_name == 'workflow_dispatch')
+
+    steps:
+      - name: Trigger Render deployment
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          if [ -z "$RENDER_DEPLOY_HOOK_URL" ]; then
+            echo "Render deploy hook secret is missing."
+            exit 1
+          fi
+
+          curl --fail --silent --show-error \
+            --retry 3 \
+            --retry-all-errors \
+            --max-time 30 \
+            --request POST \
+            "${RENDER_DEPLOY_HOOK_URL}?ref=${GITHUB_SHA}"
+
+      - name: Verify deployment health
+        env:
+          HEALTH_URL: https://py-scripts-lvc0.onrender.com/health/
+        run: |
+          echo "Waiting for the deployed application to become healthy..."
+
+          for attempt in {1..30}; do
+            if curl --fail --silent --show-error \
+              --max-time 10 "$HEALTH_URL"; then
+              echo ""
+              echo "Deployment health check passed."
+              exit 0
+            fi
+
+            echo "Attempt $attempt/30 failed. Retrying in 10 seconds..."
+            sleep 10
+          done
+
+          echo "Deployment health check failed."
+          exit 1

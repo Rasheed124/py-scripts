@@ -36,7 +36,6 @@ The application follows Django's project-and-app architecture.
 
 The settings configuration is separated by environment:
 
-```text
 config/
 ├── settings/
 │   ├── __init__.py
@@ -47,7 +46,7 @@ config/
 ├── asgi.py
 ├── urls.py
 └── wsgi.py
-```
+
 
 This separation keeps shared application configuration independent from environment-specific settings.
 

@@ -1,0 +1,51 @@
+
+name: TaskFlow CI
+
+on:
+  push:
+    branches:
+      - todo-list
+
+  pull_request:
+    branches:
+      - todo-list
+
+  workflow_dispatch:
+
+jobs:
+  quality-checks:
+    name: Django Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Django system check
+        env:
+          SECRET_KEY: ci-test-secret-key-not-for-production
+          DJANGO_SETTINGS_MODULE: config.settings.development
+        run: python manage.py check
+
+      - name: Check migration consistency
+        env:
+          SECRET_KEY: ci-test-secret-key-not-for-production
+          DJANGO_SETTINGS_MODULE: config.settings.development
+        run: python manage.py makemigrations --check --dry-run
+
+      - name: Run automated tests
+        env:
+          SECRET_KEY: ci-test-secret-key-not-for-production
+          DJANGO_SETTINGS_MODULE: config.settings.development
+        run: python manage.py test

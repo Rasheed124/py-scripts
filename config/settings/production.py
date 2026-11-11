@@ -13,7 +13,6 @@ CSRF_TRUSTED_ORIGINS = env.list(
 )
 
 
-# PostgreSQL database
 
 # PostgreSQL database
 DATABASES = {

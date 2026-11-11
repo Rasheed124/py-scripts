@@ -33,7 +33,7 @@ def task_list(request):
 
         return redirect(request.path)
 
-    # Read query parameters.
+
     query = request.GET.get("q", "").strip()
     status = request.GET.get("status", "")
     priority = request.GET.get("priority", "")
